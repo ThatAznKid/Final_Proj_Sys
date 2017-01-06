@@ -1,0 +1,88 @@
+﻿UNO by Team pikarawrx
+Jiawei Chen & Celine Yan (Per. 5)
+
+
+Description of Project
+
+
+For our final project, we would like to recreate the card game UNO. Our main goal will be to do this on one computer, and then if we have enough time, using multiple computers. The game rules will be the same as the original: each player starts out with seven cards, you play by matching the color, number, action, or symbol, and you win if you have no cards left! Rules such as typing in “UNO” when the player has one remaining card will be implemented (provided that we make it to the networking phase) -- if another player shouts UNO before the holder of one card does, the respective holder must draw another two cards. 
+For the first phase, the game will be played on one computer. If networking is implemented, each computer connected will represent a player, with the recommended range of computers (players) being two to ten. 
+
+
+
+Use of Project
+
+The player will be using the terminal to play the game. For the UI, the terminal will display the players’ names with their number of cards, every card in your hand, and the last card played.  Every turn, only your hand will only be displayed to you, as other players cannot view your hand and vice versa.
+
+        The UI will include the turn of the game, indicated by “Turn <#>” at the top of each turn. The number will be incremented every time a player ends his or her turn. 
+
+        We will also implement commands such as “Draw”, “Pass”, and “Sort”. These commands’ descriptions can be accessed by typing in “Help”. Draw gives you a new card, if you cannot place any cards down or if you choose to draw a new card anyway. Pass lets you skip your turn. Sort sorts your hand alphabetically, so your hand will be updated for the next turns.
+
+
+
+
+
+Example UI: 
+        - - - - - TURN 3 - - - - - 
+        ==========================================================
+Player 1: 5 cards in hand 
+Player 2: 6 cards in hand 
+Player 3: 4 cards in hand 
+Your Hand (Player 2) : RED 5 , GRE 7, BLU 2 , YEL 0 , WILD , DRW RED +2
+--------------------------------------
+Player 1 is currently deciding on a card… 
+--------------------------------------
+Last Card Played: GRE 6
+==========================================================
+- - - - - TURN 4 - - - - - 
+==========================================================
+Player 1: 5 cards in hand 
+Player 2: 6 cards in hand 
+Player 3: 4 cards in hand 
+Your Hand (Player 2) : RED 5 , GRE 7, BLU 2 , YEL 0 , WILD , DRW RED +2
+--------------------------------------
+Type a card to put down, or draw a card. Type “help” to display set of commands: 
+$ help
+*********************************
+* Commands:
+* “Help” - prints out the current commands and descriptions
+* “Draw” - draws a card, can only happen once per turn 
+* “Pass” - player skips his/her turn without playing a card, must draw a card before doing so 
+* “Uno” - idk if this is a thing yet.
+* “Sort” - sorts your hand alphabetically 
+*********************************
+$ GRE 7
+--------------------------------------
+Last Card Played: GRE 7
+==========================================================
+- - - - - TURN 5 - - - - - 
+==========================================================
+Player 1: 5 cards in hand 
+Player 2: 6 cards in hand 
+Player 3: 4 cards in hand 
+Your Hand (Player 2) : RED 5 , BLU 2 , YEL 0 , WILD , DRW RED +2 
+--------------------------------------
+Player 3 is currently deciding on a card… 
+--------------------------------------
+Player 3 drew a card. @
+Last Card Played: DRW GRE +2
+==========================================================
+
+
+Description of Technical Design
+We will be working with files, pipes, and networking. Files will be used to keep track of and list actions that take place in the game (e.g. a file called playedCards could list all the cards that have been played and a file called playerActions could contain all the information about the player command inputs). Pipes will be used to allow players to write into the files when it is their turn and will be closed when it is not their turn. Finally, if networking is implemented, it would be used to allow people to play UNO across multiple computers. 
+As for data structures, we will be using stacks for the deck and last card played and arrays for the player’s hand. We will also be using a sorting algorithm to alphabetize the cards. 
+
+
+Breakdown:
+Celine: .c files, commands, algorithms
+Jiawei: .c files, piping, networking
+
+
+
+
+Timeline 
+Jan 10 - Write basic functions for .c files (commands, algorithms)
+Jan 12 - Get piping down
+Jan 15 - Get a working prototype, bugfixes, start working on networking if ahead of schedule
+Jan 22 - Polishing, finalize everything, get bugfixes down for latest working version, possibly finish networking
