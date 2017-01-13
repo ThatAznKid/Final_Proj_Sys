@@ -21,15 +21,17 @@ int main(){
   	char *player = Pstr;
   	fgets(player,100,stdin);
   	player[strlen(player) - 1] = 0;
-  	printf("Variable Player is %s\n", player);
   	NAMES[counter] = player;
   	counter++;
   }
+  NAMES[counter-1] = 0;
+
   printf("================================================\n");
+  printf("Player names: %s\n", NAMES[0]); //???
+  printf("Player names: %s\n", NAMES[1]);
+  printf("Number of players: %d\n", counter-1);
   printf("================================================\n");
-  printf("Player names: ");
-  printf("================================================\n");
-  printf("================================================\n");
+  printf("\n");
   printf("Type the card to put down, or use a command. Type “help” to display set of commands: ");
   char str[100] = "";
   char *line = str;
