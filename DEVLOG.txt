@@ -1,5 +1,12 @@
 1/12/17 CELINE YAN 
-worked on player input 
+- created main.c
+- created helpbox
+- started player input
+
 
 1/12/17 JIAWEI CHEN 
-created random deck pool
+- created random deck pool
+
+1/13/17 CELINE YAN 
+- worked on player name input 
+- NAMES[] does not work ??
