@@ -9,7 +9,7 @@
 #include "deck.h" 
 
 int main(){
-
+	system("clear");
 
 /* START OF GAME */
 /* Program takes in number of players by asking for name inputs. Game will start when 
@@ -53,6 +53,7 @@ int main(){
       	    counter++;
       	}
 	}
+	sleep(1);
 	//----------------------------------------------------------------------
 	//----------------------------------------------------------------------
     int i; 
@@ -62,6 +63,7 @@ int main(){
  		printf ("Player %d: %s\n", i+1, NAMES[i]);
     printf("- - - - - - - - - - - - - - - - - - - - - - - - \n");
     printf("\n");
+    sleep(1);
     //----------------------------------------------------------------------
     //----------------------------------------------------------------------
     char *HANDS [10][7];
