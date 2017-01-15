@@ -90,7 +90,7 @@ void drawHelper (char * retstr, int r) {
 }
 
 int main ()  {
-    
+    printf ("Card Test:\n");
     printf ("Card recieved: %s\n", draw());
     return 0; 
     

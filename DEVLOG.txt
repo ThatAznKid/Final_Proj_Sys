@@ -9,4 +9,7 @@
 
 1/13/17 CELINE YAN 
 - worked on player name input 
-- NAMES[] does not work ??
+- NAMES[] does not work ?? 
+
+1/15/17 JIAWEI CHEN 
+- fixed player name input 
