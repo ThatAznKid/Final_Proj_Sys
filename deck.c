@@ -11,9 +11,9 @@ void drawHelper (char * retstr, int r);
 
 char * draw () {
     
-    srand(time(NULL));
+    sranddev();
     int r = rand() % 108; //rand number [0,107]
-    printf ("int recieved: %d\n", r); 
+    //printf ("int recieved: %d\n", r); 
     char * retstr = malloc (50);
     if ( r >= 0 && r < 25) {
         strcpy (retstr,"GRE"); 

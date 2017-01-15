@@ -14,3 +14,11 @@
 1/15/17 JIAWEI CHEN 
 - fixed player name input
 - created makefile
+
+1/15/17 CELINE YAN 
+- created HANDS[][]: stores all users' hands
+- finished HANDS[][]
+	- 2d array is established, users have hands of 7 randomly assigned cards 
+	- you can pull out a card through HANDS[i][j] 
+	- you can pull out a player's hand through HANDS[i]
+
