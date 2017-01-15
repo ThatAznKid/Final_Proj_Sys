@@ -6,6 +6,8 @@
 #include <fcntl.h>
 #include <string.h>
 
+#include "deck.h"
+
 int main(){
 
 /* START OF GAME */
@@ -53,7 +55,7 @@ int main(){
     
     //----------------------------------------------------------------------------------------------- 
     
-    printf("Type the card to put down, or use a command. Type “help” to display set of commands: ");
+    printf("Type the card to put down, or use a command. Type “help” to display a set of commands: ");
     char str[100] = "";
     char *line = str;
     fgets(line,100,stdin);

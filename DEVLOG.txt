@@ -12,4 +12,5 @@
 - NAMES[] does not work ?? 
 
 1/15/17 JIAWEI CHEN 
-- fixed player name input 
+- fixed player name input
+- created makefile

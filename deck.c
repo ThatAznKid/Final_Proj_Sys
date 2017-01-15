@@ -88,10 +88,3 @@ void drawHelper (char * retstr, int r) {
           strcat (retstr, " REVERSE"); 
         }
 }
-
-int main ()  {
-    printf ("Card Test:\n");
-    printf ("Card recieved: %s\n", draw());
-    return 0; 
-    
-}
