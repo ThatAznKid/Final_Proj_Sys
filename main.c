@@ -8,6 +8,15 @@
 
 #include "deck.h" 
 
+//xd cooler version of printf
+void type_text(char *s){
+   for (; *s; s++) {
+      putchar(*s);
+      fflush(stdout); /* alternatively, do once: setbuf(stdout, NULL); */
+      usleep(120*200);
+   }
+}
+
 int main(){
 	system("clear");
 
@@ -17,7 +26,9 @@ int main(){
 
     printf(	"\n"
     		"                    Welcome to UNO!!! \n" 
-    		"                   ------------------- \n" 
+    		"                   ------------------- \n");
+    usleep(500000);
+    type_text(     
     		"Please input player names, until there are 2 to 10 players. \n" 
     		"Start the game when you've entered all the player names you \n"
     		"wanted by typing 'START'.\n\n");
@@ -33,19 +44,19 @@ int main(){
       	fgets(player,100,stdin);
       	player[strlen(player) - 1] = 0;
       	if (counter < 2 && (strcmp (player,"START") == 0)) { 
-      	    printf ("\nWoah, there...You need at least two to tango.\n");
+      	    type_text("\nWoah, there...You need at least two to tango.\n");
       	}
       	else if (counter > 9) { 
-      	    printf ("\n You know, on second thought, I think this UNO game might \n"
+      	    type_text("\n You know, on second thought, I think this UNO game might \n"
       	    			"just take a bit too long to play...How about we leave it off \n"
       	    			"here...at 10 players!\n");
       	    break;
       	}
       	else if (strcmp (player, "") == 0) { 
-      	    printf ("\nNo ghosts allowed pl0x\n"); 
+      	    type_text("\nNo ghosts allowed pl0x\n"); 
       	}
       	else if (strcmp (player,"START") == 0) { 
-      	    printf ("\nPLAYERS SET AND LOCKED IN!\n"); 
+      	    type_text("\nPLAYERS SET AND LOCKED IN!\n"); 
       	    break;
       	}
       	else {
@@ -53,23 +64,26 @@ int main(){
       	    counter++;
       	}
 	}
-	sleep(1);
+	usleep(500000);
 	//----------------------------------------------------------------------
 	//----------------------------------------------------------------------
     int i; 
     printf("\n- - - - - - - - - - - - - - - - - - - - - - - - \n");
-    printf("Number of players: %d\n", counter);
+    type_text("Number of players: ");
+    printf("%d\n",counter);
     for (i = 0; i < counter; i++) 
  		printf ("Player %d: %s\n", i+1, NAMES[i]);
     printf("- - - - - - - - - - - - - - - - - - - - - - - - \n");
     printf("\n");
-    sleep(1);
+    //usleep(500000);
     //----------------------------------------------------------------------
     //----------------------------------------------------------------------
     char *HANDS [10][7];
     int j;
     
-    printf ("Generating the hands of each player...");
+    type_text("Generating the hands of each player ...");
+    fflush(stdout);
+
     //creating the 2d array, assigning random cards by drawing.
     for (i = 0; i < counter; i++){
     	for (j = 0; j < 7; j++){
@@ -77,7 +91,13 @@ int main(){
     		HANDS[i][j] = randCard;
     	}
     }
-
+    usleep(500000);
+    type_text(" ..."); //xd for dramatic effect
+    fflush(stdout);
+    usleep(700000);
+    type_text(" ... "); //xd for dramatic effect
+    fflush(stdout);
+    usleep(900000);
 /*
     //commented out for obvious testing purposes -- not gonna let other ppl see the hands
     //printing 2d array
@@ -120,17 +140,24 @@ PRINT OUTPUT:
 || RED 1 || GRE 7 || BLU 8 || YEL 0 || GRE 2 || YEL 1 || GRE 1 ||
 
 */
-    printf("LET'S PLAY SOME UNO!!!!\n");
+    type_text("LET'S PLAY SOME UNO!!!!\n");
+    usleep(800000);
     int turnCounter = 1;
-    while (42) { //let's play a game...
+
+    //determining which player goes by mod; this basically shifts NAMES one index over.
+    char NAMES2 [10][20];
+    for (int k = counter; k > 0; k--){   
+      strcpy(NAMES2[k],NAMES[k-1]);
+    }
+    strcpy(NAMES2[0],NAMES[counter-1]);
+
+    while (42) { //let's play a game... no >:c (celine)
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
-        printf("                 === TURN %d ===                  \n", turnCounter);
-        //something about turnCounter++ xd
-    
-        /* WHEN IT IS UR TURN =================================================*/
+        printf("\n");
+        printf("           =====  TURN %d --- Player %s's Turn  =====     \n", turnCounter, NAMES2[turnCounter % counter]); //moddin'
         printf(	"Type the card to put down, or use a command. \n"
-        		"Type “help” to display a set of commands: ");
+        		    "Type “help” to display a set of commands: ");
     
         char str[100] = "";
         char *line = str;
@@ -138,8 +165,7 @@ PRINT OUTPUT:
         line[strlen(line) - 1] = 0;
         //printf("%s\n",line);
     
-    
-        /* calling for help commands */
+        /* -------------------------------------calling for help commands */
         char helpBox[1000] = "********************************* \n"
         "* Commands:\n"
         "* 'Help' - prints out the current commands and descriptions\n"
@@ -158,10 +184,10 @@ PRINT OUTPUT:
             fgets(line,100,stdin);
             line[strlen(line) - 1] = 0;
         }
-        /* end of help commands call */
+        /* ------------------------------------end of help commands call */
         
-        turnCounter = turnCounter + 1; //end of a turn
+        turnCounter++; //end of a turn
     }
-    
+
     return 0;
 }
