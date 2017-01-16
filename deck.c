@@ -9,9 +9,9 @@
 
 void drawHelper (char * retstr, int r); 
 
-char * draw () {
+char * draw (int i, int j) {
     
-    sranddev();
+    srand(time(NULL) + (10*i) + j);
     int r = rand() % 108; //rand number [0,107]
     //printf ("int recieved: %d\n", r); 
     char * retstr = malloc (50);

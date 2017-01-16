@@ -72,12 +72,12 @@ int main(){
     //creating the 2d array, assigning random cards by drawing.
     for (i = 0; i < counter; i++){
     	for (j = 0; j < 7; j++){
-    		char * randCard = draw();
+    		char * randCard = draw(i,j);
     		HANDS[i][j] = randCard;
     	}
     }
 
-/* commented out for obvious testing purposes -- not gonna let other ppl see the hands
+    //commented out for obvious testing purposes -- not gonna let other ppl see the hands
     //printing 2d array
     for (i = 0; i < counter; i++){
     	printf("Player %d's hand: ", i+1);
@@ -93,7 +93,7 @@ int main(){
     		printf("|| %s ",HANDS[1][j]);
     }  
     printf("||\n");
-*/
+
 
     /* finished. */
     /* example output:
