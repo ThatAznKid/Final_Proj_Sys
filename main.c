@@ -68,7 +68,8 @@ int main(){
     //----------------------------------------------------------------------
     char *HANDS [10][7];
     int j;
-
+    
+    printf ("Generating the hands of each player...");
     //creating the 2d array, assigning random cards by drawing.
     for (i = 0; i < counter; i++){
     	for (j = 0; j < 7; j++){
@@ -77,6 +78,7 @@ int main(){
     	}
     }
 
+/*
     //commented out for obvious testing purposes -- not gonna let other ppl see the hands
     //printing 2d array
     for (i = 0; i < counter; i++){
@@ -93,7 +95,7 @@ int main(){
     		printf("|| %s ",HANDS[1][j]);
     }  
     printf("||\n");
-
+*/
 
     /* finished. */
     /* example output:
@@ -118,46 +120,48 @@ PRINT OUTPUT:
 || RED 1 || GRE 7 || BLU 8 || YEL 0 || GRE 2 || YEL 1 || GRE 1 ||
 
 */
-
-    //----------------------------------------------------------------------
-    //----------------------------------------------------------------------
-    int turnCounter = 0;
-    printf("                 === TURN %d ===                  \n", turnCounter);
-    //something about turnCounter++ xd
-
-    /* WHEN IT IS UR TURN =================================================*/
-    printf(	"Type the card to put down, or use a command. \n"
-    		"Type “help” to display a set of commands: ");
-
-    char str[100] = "";
-    char *line = str;
-    fgets(line,100,stdin);
-    line[strlen(line) - 1] = 0;
-    //printf("%s\n",line);
-
-
-    /* calling for help commands */
-    char helpBox[1000] = "********************************* \n"
-    "* Commands:\n"
-    "* 'Help' - prints out the current commands and descriptions\n"
-    "* 'Draw' - draws a card, can only happen once per turn \n"
-    "* 'Pass' - player skips his/her turn without playing a card,\n" 
-    "           must draw a card before doing so\n" 
-    "* 'Uno' - idk if this is a thing yet.\n"
-    "* 'Sort' - sorts your hand alphabetically \n"
-    "*********************************";
-
-    if (strcmp(line,"help") == 0){
-        printf("%s\n",helpBox);
-        printf("Card or Command: ");
+    printf("LET'S PLAY SOME UNO!!!!\n");
+    int turnCounter = 1;
+    while (42) { //let's play a game...
+        //----------------------------------------------------------------------
+        //----------------------------------------------------------------------
+        printf("                 === TURN %d ===                  \n", turnCounter);
+        //something about turnCounter++ xd
+    
+        /* WHEN IT IS UR TURN =================================================*/
+        printf(	"Type the card to put down, or use a command. \n"
+        		"Type “help” to display a set of commands: ");
+    
         char str[100] = "";
         char *line = str;
         fgets(line,100,stdin);
         line[strlen(line) - 1] = 0;
+        //printf("%s\n",line);
+    
+    
+        /* calling for help commands */
+        char helpBox[1000] = "********************************* \n"
+        "* Commands:\n"
+        "* 'Help' - prints out the current commands and descriptions\n"
+        "* 'Draw' - draws a card, can only happen once per turn \n"
+        "* 'Pass' - player skips his/her turn without playing a card,\n" 
+        "           must draw a card before doing so\n" 
+        "* 'Uno' - idk if this is a thing yet.\n"
+        "* 'Sort' - sorts your hand alphabetically \n"
+        "*********************************";
+    
+        if (strcmp(line,"help") == 0){
+            printf("%s\n",helpBox);
+            printf("Card or Command: ");
+            char str[100] = "";
+            char *line = str;
+            fgets(line,100,stdin);
+            line[strlen(line) - 1] = 0;
+        }
+        /* end of help commands call */
+        
+        turnCounter = turnCounter + 1; //end of a turn
     }
-    /* end of help commands call */
-
-
     
     return 0;
 }
