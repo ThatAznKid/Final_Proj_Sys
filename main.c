@@ -141,7 +141,7 @@ PRINT OUTPUT:
 
 */
     type_text("LET'S PLAY SOME UNO!!!!\n");
-    usleep(800000);
+    usleep(800000)
     int turnCounter = 1;
 
     //determining which player goes by mod; this basically shifts NAMES one index over.
@@ -150,8 +150,10 @@ PRINT OUTPUT:
       strcpy(NAMES2[k],NAMES[k-1]);
     }
     strcpy(NAMES2[0],NAMES[counter-1]);
+    char * currCard = draw(1,1);
+    printf("\nCurrent card: %s\n", currCard);
 
-    while (42) { //let's play a game... no >:c (celine)
+    while (42) { //let's play a game... 
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
         printf("\n");
@@ -169,9 +171,10 @@ PRINT OUTPUT:
         char helpBox[1000] = "********************************* \n"
         "* Commands:\n"
         "* 'Help' - prints out the current commands and descriptions\n"
-        "* 'Draw' - draws a card, can only happen once per turn \n"
-        "* 'Pass' - player skips his/her turn without playing a card,\n" 
-        "           must draw a card before doing so\n" 
+        "* 'Draw' - draws a card, can only happen once per turn, then \n"
+        "*			has the option to play a card.\n"
+        "* 'Pass' - draws a card if player hasn't already, player\n" 
+        "*          skips his/her turn without playing a card.\n" 
         "* 'Uno' - idk if this is a thing yet.\n"
         "* 'Sort' - sorts your hand alphabetically \n"
         "*********************************";
@@ -186,8 +189,50 @@ PRINT OUTPUT:
         }
         /* ------------------------------------end of help commands call */
         
+        //check if the card they put down is valid (ex: if it's in their hand)
+        //variable set to lseek to check if card is playable; if not, prompts user to 
+        //put down a new card or draw
+
+        //if playable:
+        //-------------
+        // replaces curr card
+        // write to playedCards
+        // make a new array with size -1
+        // copy over to new array by running boolean check to see if card has been taken out
+
+
+
+        //if pass:
+        //--------
+        // check if drew card
+        // draws card if haven't: make a new array with size +1, copy over cards
+        // if drew already: break ??
+
+        //if draw:
+        //--------
+        // make a new array with size +1, copy over cards
+        // prompt player to put down card or 'Pass'
+        // if put down card --> playable fxn
+        // if 'Pass' --> pass fxn
+
+        //if sort:
+        //--------
+        //tentative lmao
+
+
+
         turnCounter++; //end of a turn
     }
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
