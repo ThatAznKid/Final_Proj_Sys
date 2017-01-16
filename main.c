@@ -141,12 +141,13 @@ PRINT OUTPUT:
 
 */
     type_text("LET'S PLAY SOME UNO!!!!\n");
-    usleep(800000)
+    usleep(800000);
     int turnCounter = 1;
 
     //determining which player goes by mod; this basically shifts NAMES one index over.
     char NAMES2 [10][20];
-    for (int k = counter; k > 0; k--){   
+    int k;
+    for (k = counter; k > 0; k--){   
       strcpy(NAMES2[k],NAMES[k-1]);
     }
     strcpy(NAMES2[0],NAMES[counter-1]);
