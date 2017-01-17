@@ -20,5 +20,10 @@
 - finished HANDS[][]
 	- 2d array is established, users have hands of 7 randomly assigned cards 
 	- you can pull out a card through HANDS[i][j] 
-	- you can pull out a player's hand through HANDS[i]
+	- you can pull out a player's hand through HANDS[i] 
+	
+1/16/17 JIAWEI CHEN 
+- small additions to UI 
+
+
 
