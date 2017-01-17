@@ -6,7 +6,8 @@
 #include <fcntl.h>
 #include <string.h>
 
-#include "deck.h" 
+#include "deck.h"
+#include "commands.h" 
 
 //xd cooler version of printf
 void type_text(char *s){
@@ -212,8 +213,6 @@ PRINT OUTPUT:
         // write to playedCards
         // make a new array with size -1
         // copy over to new array by running boolean check to see if card has been taken out
-
-
 
         //if pass:
         //--------
