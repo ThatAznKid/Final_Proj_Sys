@@ -8,6 +8,7 @@
 
 #include "deck.h"
 #include "commands.h" 
+#include "helperFxns.h"
 
 //xd cooler version of printf
 void type_text(char *s){
@@ -50,11 +51,11 @@ int main(){
       	else if (counter > 9) { 
       	    type_text("\n You know, on second thought, I think this UNO game might \n"
       	    			"just take a bit too long to play...How about we leave it off \n"
-      	    			"here...at 10 players!\n");
+      	    			"here...at 10 players!\n\n");
       	    break;
       	}
       	else if (strcmp (player, "") == 0) { 
-      	    type_text("\nNo ghosts allowed pl0x\n"); 
+      	    type_text("\nNo ghosts allowed pl0x\n\n"); 
       	}
       	else if (strcmp (player,"START") == 0) { 
       	    type_text("\nPLAYERS SET AND LOCKED IN!\n"); 
@@ -79,7 +80,7 @@ int main(){
     //usleep(500000);
     //----------------------------------------------------------------------
     //----------------------------------------------------------------------
-    char *HANDS [10][7];
+    char *HANDS [10][8];
     int j;
     
     type_text("Generating the hands of each player ...");
@@ -91,6 +92,7 @@ int main(){
     		char * randCard = draw(i,j);
     		HANDS[i][j] = randCard;
     	}
+        HANDS[i][j] = 0;
     }
     usleep(500000);
     type_text(" ..."); //xd for dramatic effect
@@ -99,7 +101,7 @@ int main(){
     type_text(" ... "); //xd for dramatic effect
     fflush(stdout);
     usleep(900000);
-    
+
 /*
     //commented out for obvious testing purposes -- not gonna let other ppl see the hands
     //printing 2d array
@@ -111,9 +113,7 @@ int main(){
     	}
     	printf("||\n");
     }
-    */
-
-/*
+    
     //printing player 2's hand (as an example)
 	for (j = 0; j < 7; j++){
     		printf("|| %s ",HANDS[1][j]);
@@ -162,47 +162,80 @@ PRINT OUTPUT:
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
         printf("\n");
-        printf("           =====  TURN %d --- Player %s's Turn  =====     \n", turnCounter, NAMES2[turnCounter % counter]); //moddin'
+        int currPlayerNumba = turnCounter % counter; //whose turn it is
+        int currPlayerIndex = turnCounter % counter - 1; //index in HANDS is counter
+        if (currPlayerIndex == -1) 
+            currPlayerIndex = counter - 1; 
+        printf("           =====  TURN %d --- Player %s's Turn  =====\n", turnCounter, NAMES2[currPlayerNumba]); //moddin'
+
+        /* find the length of all players' hands */
+        /* ------------------------------------- */
+        int arrayLen = 0;
         for (i = 0; i < counter; i++){
-    	    printf("Number of Cards in %s (Player %d)'s hand: %d\n", NAMES[i], i+1, 7); //need a way to track the 7, either manually or algo
+            while (HANDS[i][arrayLen]){arrayLen++;} //see how long the array is
+    	    printf("Number of Cards in %s (Player %d)'s hand: %d\n", NAMES[i], i+1, arrayLen);
+            arrayLen = 0; //reset length of array counter
         }
-        printf("\nCurrent player's hand: ");   
-        for (j = 0; j < 7; j++){ //***7 NEEDS TO REPLACED WITH SOME SORT OF METHOD TO FIND ARR LENGTH
-    		printf("|| %s ",HANDS[(turnCounter % counter) - 1][j]);
-        }  
+
+        /* find the length of player's hand */
+        /* -------------------------------- */
+        int currHandLen = 0; //var currHandLen stores current length of hand
+        while (HANDS[currPlayerNumba][currHandLen]){currHandLen++;} //see how long current player's hand is
+        printf("\nCurrent player's hand: ");  
+        //***7 NEEDS TO REPLACED WITH SOME SORT OF METHOD TO FIND ARR LENGTH (done on line below)  
+        for (j = 0; j < currHandLen; j++){printf("|| %s ",HANDS[currPlayerIndex][j]);}  
         printf("||\n"); 
-        
+    
+        /* prompt the user */
+        /* --------------- */
         printf(	"Type the card to put down, or use a command. \n"
-        		    "Type “help” to display a set of commands: "); 
+        		"Type “help” to display a set of commands: "); 
     
+        /* var *** play *** is the card that player put down */
+        /* ------------------------------------------------- */
         char str[100] = "";
-        char *line = str;
-        fgets(line,100,stdin);
-        line[strlen(line) - 1] = 0;
-        //printf("%s\n",line);
+        char *play = str;
+        fgets(play,100,stdin);
+        play[strlen(play) - 1] = 0;
+        printf("play = %s\n", play);
+
     
-        /* -------------------------------------calling for help commands */
-        char helpBox[1000] = "********************************* \n"
-        "* Commands:\n"
-        "* 'Help' - prints out the current commands and descriptions\n"
-        "* 'Draw' - draws a card, can only happen once per turn, then \n"
-        "*			has the option to play a card.\n"
-        "* 'Pass' - draws a card if player hasn't already, player\n" 
-        "*          skips his/her turn without playing a card.\n" 
-        "* 'Uno' - idk if this is a thing yet.\n"
-        "* 'Sort' - sorts your hand alphabetically \n"
-        "*********************************";
-    
-        if (strcmp(line,"help") == 0){
-            printf("%s\n",helpBox);
-            printf("Card or Command: ");
-            char str[100] = "";
-            char *line = str;
-            fgets(line,100,stdin);
-            line[strlen(line) - 1] = 0;
-        }
-        /* ------------------------------------end of help commands call */
+        //if play in hand or play matches w lseeked last card by color or # or wild or skip/rev
+
+        // ==========================================================================================
+        // IF PLAYABLE ==============================================================================
+        // ==========================================================================================
+
+        /* is play in the user's hand!?! */
+        /* ----------------------------- */
+        /*
+        int inHand = 0; //lowkey boolean : 0 = false ; 1 = true
         
+        for (j = 0; j < currHandLen; j++){
+            //printf("current card in hand = %s\n", HANDS[currPlayerIndex][j]);
+            //printf("curr player index: %d\n", currPlayerIndex);
+            if (strcmp(play, HANDS[currPlayerIndex][j]) == 0){
+                inHand = 1;
+                break;
+            }
+        }
+        */
+
+
+        int x = inHand( currPlayerNumba, currPlayerIndex, play, HANDS[currPlayerIndex]);
+        
+        //printf("inHand?: %d\n", inHand);
+        
+        if (x == 0){ //if false
+
+        }
+        
+        else if (x == 1){ //if false
+            printf("Your card was not playable. Please check if your card was typed\n"
+                   "correctly or if it is in your hand. Note that if you do not have \n"
+                   "a playable card, you must draw. Try again: ");
+
+        }
         //check if the card they put down is valid (ex: if it's in their hand)
         //variable set to lseek to check if card is playable; if not, prompts user to 
         //put down a new card or draw
@@ -231,6 +264,18 @@ PRINT OUTPUT:
         //--------
         //tentative lmao
 
+        //if help:   
+        //-------- DONE 
+        if (strcmp(play,"help") == 0){
+            printf("%s\n",helpBox);
+            printf("Card or Command: ");
+            char str[100] = "";
+            char *play = str;
+            fgets(play,100,stdin);
+            play[strlen(play) - 1] = 0;
+        }
+
+        
 
 
         turnCounter++; //end of a turn

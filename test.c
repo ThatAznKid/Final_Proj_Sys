@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <string.h>
 
+/*
 char ** playable( char **origHand, char *playedCard ){
 	//your part:
 	//replaces currCard
@@ -62,3 +63,34 @@ int main(){
 
 	return 0;
 }
+*/
+
+int main(){
+
+	char ** hand = (char **)calloc(1,sizeof(char *) * 1000 );
+
+	int x =0;
+	for(; x< 50;x++){
+		char * s = (char *)calloc(1,sizeof(char) * 1000);
+		sprintf(s, "%dd",x);
+		hand[x] = s;
+	}
+
+	int counter = 0;
+
+	while (hand[counter]){ counter++; } //see how long the array is
+
+	printf("counter: %d\n", counter);
+
+	return 0;
+
+
+}
+
+
+
+
+
+
+
+
