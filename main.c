@@ -98,6 +98,7 @@ int main(){
     type_text(" ... "); //xd for dramatic effect
     fflush(stdout);
     usleep(900000);
+    
 /*
     //commented out for obvious testing purposes -- not gonna let other ppl see the hands
     //printing 2d array
@@ -109,7 +110,9 @@ int main(){
     	}
     	printf("||\n");
     }
+    */
 
+/*
     //printing player 2's hand (as an example)
 	for (j = 0; j < 7; j++){
     		printf("|| %s ",HANDS[1][j]);
@@ -159,8 +162,17 @@ PRINT OUTPUT:
         //----------------------------------------------------------------------
         printf("\n");
         printf("           =====  TURN %d --- Player %s's Turn  =====     \n", turnCounter, NAMES2[turnCounter % counter]); //moddin'
+        for (i = 0; i < counter; i++){
+    	    printf("Number of Cards in %s (Player %d)'s hand: %d\n", NAMES[i], i+1, 7); //need a way to track the 7, either manually or algo
+        }
+        printf("\nCurrent player's hand: ");   
+        for (j = 0; j < 7; j++){ //***7 NEEDS TO REPLACED WITH SOME SORT OF METHOD TO FIND ARR LENGTH
+    		printf("|| %s ",HANDS[(turnCounter % counter) - 1][j]);
+        }  
+        printf("||\n"); 
+        
         printf(	"Type the card to put down, or use a command. \n"
-        		    "Type “help” to display a set of commands: ");
+        		    "Type “help” to display a set of commands: "); 
     
         char str[100] = "";
         char *line = str;
