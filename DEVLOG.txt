@@ -25,5 +25,9 @@
 1/16/17 JIAWEI CHEN 
 - small additions to UI 
 
+1/16/17 CELINE YAN 
+- started on game function numero UNO: playable()
+	- constructed array manipulation -- does not work as of yet 
+
 
 
