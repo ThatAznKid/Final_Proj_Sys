@@ -19,6 +19,20 @@ void type_text(char *s){
    }
 }
 
+//leave the handling of the array one size bigger in the main conditional 
+void drawCard(char * HAND[]) { //input the player's hand who you want the card to be added to
+    char * toBeAdded = draw(1,1); 
+    int count = 0;
+    
+    while (HAND[count]) { 
+        count++;           
+    }
+    
+    HAND[count] = toBeAdded; 
+    HAND[count + 1] = NULL;
+
+}
+
 int main(){
 	system("clear");
 
@@ -80,7 +94,7 @@ int main(){
     //usleep(500000);
     //----------------------------------------------------------------------
     //----------------------------------------------------------------------
-    char *HANDS [10][8];
+    char *HANDS [10][100]; //initially we only need 8 spaces, but 100 bc celine says so
     int j;
     
     type_text("Generating the hands of each player ...");
@@ -199,6 +213,18 @@ PRINT OUTPUT:
         play[strlen(play) - 1] = 0;
         printf("play = %s\n", play);
 
+        //this part is a lil messy rn  
+        
+        if (strcmp (play,"draw") == 0) { 
+            drawCard(HANDS[currPlayerIndex]); 
+            currHandLen++; 
+            
+            for (j = 0; j < currHandLen; j++){
+    		    printf("|| %s ",HANDS[currPlayerIndex][j]);
+            }  
+            printf("||\n");
+            
+        }
     
         //if play in hand or play matches w lseeked last card by color or # or wild or skip/rev
 
@@ -221,7 +247,7 @@ PRINT OUTPUT:
         }
         */
 
-
+        /* //COMMENTED OUT BC IT'S REALLY CONFUSING TRYNA TEST WITH THIS SRY
         int x = inHand( currPlayerNumba, currPlayerIndex, play, HANDS[currPlayerIndex]);
         
         //printf("inHand?: %d\n", inHand);
@@ -236,7 +262,8 @@ PRINT OUTPUT:
         else if (x == 1){ //if in hand!!! :D
 
 
-        }
+        } 
+        */
         //check if the card they put down is valid (ex: if it's in their hand)
         //variable set to lseek to check if card is playable; if not, prompts user to 
         //put down a new card or draw
