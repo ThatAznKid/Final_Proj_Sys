@@ -30,6 +30,5 @@
 	- constructed array manipulation -- does not work as of yet 
 - created way to check length of array
 	- modified original length of 7 --> 8 to account for null at end of array in 2d array
-
-
+- created helperFxns.c (moved fgets there)
 
