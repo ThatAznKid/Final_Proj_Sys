@@ -23,14 +23,11 @@ void type_text(char *s){
 void drawCard(char * HAND[]) { //input the player's hand who you want the card to be added to
     char * toBeAdded = draw(1,1); 
     int count = 0;
-    
     while (HAND[count]) { 
         count++;           
     }
-    
     HAND[count] = toBeAdded; 
     HAND[count + 1] = NULL;
-
 }
 
 int main(){
@@ -194,7 +191,7 @@ PRINT OUTPUT:
         /* find the length of player's hand */
         /* -------------------------------- */
         int currHandLen = 0; //var currHandLen stores current length of hand
-        while (HANDS[currPlayerNumba][currHandLen]){currHandLen++;} //see how long current player's hand is
+        while (HANDS[currPlayerIndex][currHandLen]){currHandLen++;} //see how long current player's hand is
         printf("\nCurrent player's hand: ");  
         //***7 NEEDS TO REPLACED WITH SOME SORT OF METHOD TO FIND ARR LENGTH (done on line below)  
         for (j = 0; j < currHandLen; j++){printf("|| %s ",HANDS[currPlayerIndex][j]);}  
@@ -218,12 +215,10 @@ PRINT OUTPUT:
         if (strcmp (play,"draw") == 0) { 
             drawCard(HANDS[currPlayerIndex]); 
             currHandLen++; 
-            
             for (j = 0; j < currHandLen; j++){
     		    printf("|| %s ",HANDS[currPlayerIndex][j]);
             }  
             printf("||\n");
-            
         }
     
         //if play in hand or play matches w lseeked last card by color or # or wild or skip/rev
