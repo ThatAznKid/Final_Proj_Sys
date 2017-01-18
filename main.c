@@ -226,14 +226,15 @@ PRINT OUTPUT:
         
         //printf("inHand?: %d\n", inHand);
         
-        if (x == 0){ //if false
-
-        }
-        
-        else if (x == 1){ //if false
+        if (x == 0){ //if not in hand :^(
             printf("Your card was not playable. Please check if your card was typed\n"
                    "correctly or if it is in your hand. Note that if you do not have \n"
                    "a playable card, you must draw. Try again: ");
+            printf("===================================================== not done & doesnt work :'(\n\n");
+        }
+        
+        else if (x == 1){ //if in hand!!! :D
+
 
         }
         //check if the card they put down is valid (ex: if it's in their hand)
