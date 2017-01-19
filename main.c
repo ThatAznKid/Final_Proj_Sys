@@ -177,30 +177,30 @@ PRINT OUTPUT:
         int currPlayerIndex = turnCounter % counter - 1; //index in HANDS is counter
         if (currPlayerIndex == -1) 
             currPlayerIndex = counter - 1; 
-        printf("           =====  TURN %d --- Player %s's Turn  =====\n", turnCounter, NAMES2[currPlayerNumba]); //moddin'
+        printf("           =====  TURN %d --- [ %s's Turn ]  =====\n", turnCounter, NAMES2[currPlayerNumba]); //moddin'
 
         /* find the length of all players' hands */
         /* ------------------------------------- */
         int arrayLen = 0;
         for (i = 0; i < counter; i++){
             while (HANDS[i][arrayLen]){arrayLen++;} //see how long the array is
-    	    printf("Number of Cards in %s (Player %d)'s hand: %d\n", NAMES[i], i+1, arrayLen);
+    	    printf("P%d: Number of Cards in %s's hand: %d\n", i+1, NAMES[i], arrayLen);
             arrayLen = 0; //reset length of array counter
+            usleep(150000);
         }
-
+        usleep(150000);
         /* find the length of player's hand */
         /* -------------------------------- */
         int currHandLen = 0; //var currHandLen stores current length of hand
         while (HANDS[currPlayerIndex][currHandLen]){currHandLen++;} //see how long current player's hand is
-        printf("\nCurrent player's hand: ");  
-        //***7 NEEDS TO REPLACED WITH SOME SORT OF METHOD TO FIND ARR LENGTH (done on line below)  
+        printf("\n%s's hand:\n", NAMES2[currPlayerNumba]);    
         for (j = 0; j < currHandLen; j++){printf("|| %s ",HANDS[currPlayerIndex][j]);}  
-        printf("||\n"); 
-    
+        printf("||\n\n"); 
+    	usleep(300000);
         /* prompt the user */
         /* --------------- */
-        printf(	"Type the card to put down, or use a command. \n"
-        		"Type “help” to display a set of commands: "); 
+        type_text(	"Type the card to put down, or use a command. \n"
+        			"Type “help” to display a set of commands: "); 
     
         /* var *** play *** is the card that player put down */
         /* ------------------------------------------------- */
@@ -208,17 +208,21 @@ PRINT OUTPUT:
         char *play = str;
         fgets(play,100,stdin);
         play[strlen(play) - 1] = 0;
-        printf("play = %s\n", play);
+        printf("**testing purposes** play = %s\n", play);
 
         //this part is a lil messy rn  
         
-        if (strcmp (play,"draw") == 0) { 
+        if (strcmp (play,"draw") == 0) {
+        	type_text("\nYou drew a card!\n");
+        	usleep(400000);
+        	type_text("\nHere's your new hand:\n");  
             drawCard(HANDS[currPlayerIndex]); 
             currHandLen++; 
             for (j = 0; j < currHandLen; j++){
     		    printf("|| %s ",HANDS[currPlayerIndex][j]);
             }  
             printf("||\n");
+            usleep(500000);
         }
     
         //if play in hand or play matches w lseeked last card by color or # or wild or skip/rev
