@@ -44,6 +44,7 @@
 	- users can now place a card and the code won't break! yay.
 - cloning over the returned array from playable() is still broken. (why doesnt memcpy work???)
 
-
+1/20/17 CELINE YAN
+- playable() works
 
 

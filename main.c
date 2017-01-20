@@ -218,7 +218,7 @@ PRINT OUTPUT:
         
         /* if not... */
         /* --------- */
-        if (x == 0){ 
+        while (x == 0){ 
             type_text("Your card was not playable. Please check if your card was typed\n"
                    "correctly or if it is in your hand. Note that if you do not have \n"
                    "a playable card, you must draw. Try again: ");
@@ -228,6 +228,9 @@ PRINT OUTPUT:
             fgets(play,100,stdin);
             play[strlen(play) - 1] = 0;
             printf("\n");
+
+            //:D work on dis later!!
+            x = inHand( currHandLen, currPlayerIndex, play, HANDS[currPlayerIndex]);
         }
 
         /* if so... */
