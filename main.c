@@ -234,16 +234,30 @@ PRINT OUTPUT:
         if (x == 1){ //if in hand!!! :D
         	//HANDS[currPlayerIndex] = *playable(HANDS[currPlayerIndex],play);
         	memcpy(HANDS[currPlayerIndex], playable(HANDS[currPlayerIndex],play), arrayLen);
+            /* char newHand[100];
+            newHand = playable(HANDS[currPlayerIndex],play);
+            printf("New hand len:\n"); 
+            for (j = 0; j < currHandLen; j++){
+                printf("|| %s ",newHand[j]);
+            }     
+            printf("||\n");            
+            */
+            /*
+            for (j = 0; j < currHandLen; j++){
+                strHANDS[currPlayerIndex]
+                //printf("|| %s ",HANDS[currPlayerIndex][j]);
+            }  
+            */           
         	type_text("\nYou played ");
         	printf("%s!\n", play);
         	usleep(300000);
         	type_text("\nHere's your new hand:\n");  
             //drawCard(HANDS[currPlayerIndex]); 
-            //currHandLen++; 
+            //currHandLen--; 
             for (j = 0; j < currHandLen; j++){
     		    printf("|| %s ",HANDS[currPlayerIndex][j]);
-            }  
-
+            }     
+            printf("||\n");
         } 
         
         //check if the card they put down is valid (ex: if it's in their hand)

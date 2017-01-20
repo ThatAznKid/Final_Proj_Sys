@@ -39,5 +39,11 @@
 1/19/17 CELINE YAN 
 - improved layout of text
 - finished inHand fxn in helperFxns.c
+- integrated playable into game (currently W.I.P., 96% there)
+	- fixed issue with last index of cloning array within playable. 
+	- users can now place a card and the code won't break! yay.
+- cloning over the returned array from playable() is still broken. (why doesnt memcpy work???)
+
+
 
 

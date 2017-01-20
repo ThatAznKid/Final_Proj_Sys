@@ -32,20 +32,48 @@ char ** playable( char **origHand, char *playedCard ){
 	int origIndex = 0;
 	int newIndex = 0;
 	memset(newHand, '\0', sizeof(newHand));
-	while (origHand[origIndex] != 0){
-			if (strcmp(origHand[origIndex],playedCard) == 0){
-				printf("FOUND THE CARD!! \n");
-				origIndex++;
+	while (origHand[origIndex] != 0 && origHand[origIndex+1] != 0){ //accounts for last
+		//printf("=====================================");
+		//printf("orig index + 1 is: %d\n", origIndex+1);
+		//printf("origHand [orig index + 1]is: %s\n", origHand[origIndex+1]);
+ 			if (strcmp(origHand[origIndex],playedCard) == 0){
+				//printf("FOUND THE CARD!! \n");
+				origIndex++; //have to account for last if incrementing
 				boolean = 1;
 			}
-		printf("orig index: %d\n", origIndex);
-		printf("new index: %d\n", newIndex);
+		//printf("orig index: %d\n", origIndex);
+		//printf("new index: %d\n", newIndex);
 		newHand[newIndex] = origHand[origIndex];
-		printf("newHand[newIndex]: %s\n", newHand[newIndex]);
+		//printf("newHand[newIndex]: %s\n", newHand[newIndex]);
 		newIndex++;
 		origIndex++;
+		//printf("orig index++ : %d\n", origIndex);
+		//printf("new index++ : %d\n", newIndex);
 	}
-	printf("last index: %d\n", newIndex);
+
+	//if playedCard was the last card in hand... this takes care of it.
+	if (strcmp(origHand[origIndex], playedCard) == 0){
+
+		newHand[newIndex] = 0;
+			//printf("LAST CARD TEST PRINT: printing out hand from fxn:\n");
+			int t;
+			for (t = 0; t < newIndex; t++){printf("|| %s ",newHand[t]);}  
+    		printf("||\n\n");
+    	return newHand; //return statement terminates function
+	}
+
+	//otherwise, proceed with cloning last card and insert null.
+
+	//printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	//	printf("orig index: %d\n", origIndex);
+	//	printf("new index: %d\n", newIndex);
+		newHand[newIndex] = origHand[origIndex];
+	//	printf("newHand[newIndex]: %s\n", newHand[newIndex]);
+		newIndex++;
+		origIndex++;
+	//	printf("orig index++ : %d\n", origIndex);
+	//	printf("new index++ : %d\n", newIndex);
+	//printf("last index: %d\n", newIndex);
 	newHand[newIndex] = 0;
 
 	printf("printing out hand from fxn:\n");
