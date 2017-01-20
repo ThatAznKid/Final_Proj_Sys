@@ -71,7 +71,7 @@ int main(){
     //usleep(500000);
     //----------------------------------------------------------------------
     //----------------------------------------------------------------------
-    char *HANDS [10][100]; //initially we only need 8 spaces, but 100 bc celine says so
+    char * HANDS[10][100]; //(char ***)malloc(sizeof(char**) * 1000); //initially we only need 8 spaces, but 100 bc celine says so
     int j;
     
     type_text("Generating the hands of each player ...");
@@ -79,8 +79,9 @@ int main(){
 
     //creating the 2d array, assigning random cards by drawing.
     for (i = 0; i < counter; i++){
-    	for (j = 0; j < 7; j++){
+      for (j = 0; j < 7; j++){
     		char * randCard = draw(i,j);
+            //printf("randCard %s\n",randCard);
     		HANDS[i][j] = randCard;
     	}
         HANDS[i][j] = 0;
@@ -232,8 +233,17 @@ PRINT OUTPUT:
         /* if so... */
         /* --------- */        
         if (x == 1){ //if in hand!!! :D
+          int j = 0;
+          char ** p = playable(HANDS[currPlayerIndex], play);
+          while(*p ){
+            strcpy(HANDS[currPlayerIndex][j], *p);
+            p++;
+            j++;
+          }
+          HANDS[currPlayerIndex][j] = 0;
         	//HANDS[currPlayerIndex] = *playable(HANDS[currPlayerIndex],play);
-        	memcpy(HANDS[currPlayerIndex], playable(HANDS[currPlayerIndex],play), arrayLen);
+          //HANDS[currPlayerIndex] = playable(HANDS[currPlayerIndex],play);
+          //memcpy(HANDS[currPlayerIndex], playable(HANDS[currPlayerIndex],play), arrayLen);
             /* char newHand[100];
             newHand = playable(HANDS[currPlayerIndex],play);
             printf("New hand len:\n"); 
@@ -253,7 +263,7 @@ PRINT OUTPUT:
         	usleep(300000);
         	type_text("\nHere's your new hand:\n");  
             //drawCard(HANDS[currPlayerIndex]); 
-            //currHandLen--; 
+            currHandLen--; 
             for (j = 0; j < currHandLen; j++){
     		    printf("|| %s ",HANDS[currPlayerIndex][j]);
             }     
