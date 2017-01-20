@@ -10,26 +10,6 @@
 #include "commands.h" 
 #include "helperFxns.h"
 
-//xd cooler version of printf
-void type_text(char *s){
-   for (; *s; s++) {
-      putchar(*s);
-      fflush(stdout); /* alternatively, do once: setbuf(stdout, NULL); */
-      usleep(120*200);
-   }
-}
-
-//leave the handling of the array one size bigger in the main conditional 
-void drawCard(char * HAND[]) { //input the player's hand who you want the card to be added to
-    char * toBeAdded = draw(1,1); 
-    int count = 0;
-    while (HAND[count]) { 
-        count++;           
-    }
-    HAND[count] = toBeAdded; 
-    HAND[count + 1] = NULL;
-}
-
 int main(){
 	system("clear");
 
@@ -214,7 +194,7 @@ PRINT OUTPUT:
         
         if (strcmp (play,"draw") == 0) {
         	type_text("\nYou drew a card!\n");
-        	usleep(400000);
+        	usleep(300000);
         	type_text("\nHere's your new hand:\n");  
             drawCard(HANDS[currPlayerIndex]); 
             currHandLen++; 
@@ -222,7 +202,7 @@ PRINT OUTPUT:
     		    printf("|| %s ",HANDS[currPlayerIndex][j]);
             }  
             printf("||\n");
-            usleep(500000);
+            usleep(300000);
         }
     
         //if play in hand or play matches w lseeked last card by color or # or wild or skip/rev
@@ -230,39 +210,42 @@ PRINT OUTPUT:
         // ==========================================================================================
         // IF PLAYABLE ==============================================================================
         // ==========================================================================================
-
-        /* is play in the user's hand!?! */
-        /* ----------------------------- */
-        /*
-        int inHand = 0; //lowkey boolean : 0 = false ; 1 = true
         
-        for (j = 0; j < currHandLen; j++){
-            //printf("current card in hand = %s\n", HANDS[currPlayerIndex][j]);
-            //printf("curr player index: %d\n", currPlayerIndex);
-            if (strcmp(play, HANDS[currPlayerIndex][j]) == 0){
-                inHand = 1;
-                break;
-            }
-        }
-        */
-
-        /* //COMMENTED OUT BC IT'S REALLY CONFUSING TRYNA TEST WITH THIS SRY
-        int x = inHand( currPlayerNumba, currPlayerIndex, play, HANDS[currPlayerIndex]);
+        /* is the played card in their hand? */
+        /* --------------------------------- */
+        int x = inHand( currHandLen, currPlayerIndex, play, HANDS[currPlayerIndex]);
         
-        //printf("inHand?: %d\n", inHand);
-        
-        if (x == 0){ //if not in hand :^(
-            printf("Your card was not playable. Please check if your card was typed\n"
+        /* if not... */
+        /* --------- */
+        if (x == 0){ 
+            type_text("Your card was not playable. Please check if your card was typed\n"
                    "correctly or if it is in your hand. Note that if you do not have \n"
                    "a playable card, you must draw. Try again: ");
-            printf("===================================================== not done & doesnt work :'(\n\n");
+            //how to make recursive???
+            char str[100] = "";
+            char *play = str;
+            fgets(play,100,stdin);
+            play[strlen(play) - 1] = 0;
+            printf("\n");
         }
-        
-        else if (x == 1){ //if in hand!!! :D
 
+        /* if so... */
+        /* --------- */        
+        if (x == 1){ //if in hand!!! :D
+        	//HANDS[currPlayerIndex] = *playable(HANDS[currPlayerIndex],play);
+        	memcpy(HANDS[currPlayerIndex], playable(HANDS[currPlayerIndex],play), arrayLen);
+        	type_text("\nYou played ");
+        	printf("%s!\n", play);
+        	usleep(300000);
+        	type_text("\nHere's your new hand:\n");  
+            //drawCard(HANDS[currPlayerIndex]); 
+            //currHandLen++; 
+            for (j = 0; j < currHandLen; j++){
+    		    printf("|| %s ",HANDS[currPlayerIndex][j]);
+            }  
 
         } 
-        */
+        
         //check if the card they put down is valid (ex: if it's in their hand)
         //variable set to lseek to check if card is playable; if not, prompts user to 
         //put down a new card or draw

@@ -36,4 +36,8 @@
 - fixed draw issue with the null
 - finished draw function
 
+1/19/17 CELINE YAN 
+- improved layout of text
+- finished inHand fxn in helperFxns.c
+
 
