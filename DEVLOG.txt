@@ -50,5 +50,7 @@
 - solved "recursive issue": 
 	- if player inputs wrong/unplayable card, it is thrown into while loop until player puts down legit card.
 
+1/21/17 CELINE YAN
+- playable wasnt workin but now it works!! 
 
 

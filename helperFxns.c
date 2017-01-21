@@ -38,7 +38,7 @@ int inHand( int currHandLen, int currPlayerIndex, char *play, char **hand ){
 }
 
 char * returnPlay(char *s){
-  printf("successful return of helper function: %s\n", s);
+  //printf("successful return of helper function: %s\n", s);
   return s;
 }
 

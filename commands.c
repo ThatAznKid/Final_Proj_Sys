@@ -26,7 +26,7 @@ char ** playable( char **origHand, char *playedCard ){
 	//your part:
 	//replaces currCard
 	//write to playedCards
-	printf("playedCard: %s\n", playedCard);
+	//printf("playedCard: %s\n", playedCard);
 	char **newHand = (char **)malloc(sizeof(char *) * 1000);
 	int boolean = 0; 
 	int origIndex = 0;
@@ -37,9 +37,13 @@ char ** playable( char **origHand, char *playedCard ){
 		//printf("orig index + 1 is: %d\n", origIndex+1);
 		//printf("origHand [orig index + 1]is: %s\n", origHand[origIndex+1]);
  			if (strcmp(origHand[origIndex],playedCard) == 0){
-				printf("FOUND THE CARD!! \n");
+				//printf("FOUND THE CARD!! \n");
 				origIndex++; //have to account for last if incrementing
 				boolean = 1;
+				if (strcmp(origHand[origIndex], playedCard) == 0){
+					//printf("ima break \n");
+					break;
+				}
 			}
 		//printf("orig index: %d\n", origIndex);
 		//printf("new index: %d\n", newIndex);
@@ -48,13 +52,27 @@ char ** playable( char **origHand, char *playedCard ){
 		newIndex++;
 		//if (strcmp(origHand[origIndex+1], playedCard) == 0) break; //save 2nd to last card
 		origIndex++;
-		printf("orig index++ : %d\n", origIndex);
+		//printf("orig index++ : %d\n", origIndex);
 		//printf("new index++ : %d\n", newIndex);
 	}
-	printf("helloOOO this works!\n");
+	//printf("helloOOO this works!\n");
 	//if playedCard was the last card in hand... this takes care of it.
-	if (strcmp(origHand[origIndex], playedCard) == 0){
+	//printf("origHand[origIndex] = %s playedCard = %s\n", origHand[origIndex], playedCard);
+	if (origHand[origIndex] == 0){
+		//printf("in the if\n");
+		newHand[newIndex] = 0;
 
+	printf("printing out hand from fxn:\n");
+	int j;
+	for (j = 0; j < newIndex; j++){printf("|| %s ",newHand[j]);}  
+    printf("||\n\n");
+	return newHand;
+	}
+
+	//printf("%d\n", strcmp(origHand[origIndex], playedCard));
+	
+	if (strcmp(origHand[origIndex], playedCard) == 0){
+		//printf("heyo\n");
 		newHand[newIndex] = 0;
 			//printf("LAST CARD TEST PRINT: printing out hand from fxn:\n");
 			int t;
@@ -62,7 +80,8 @@ char ** playable( char **origHand, char *playedCard ){
     		printf("||\n\n");
     	return newHand; //return statement terminates function
 	}
-	printf("hello this works!\n");
+
+	//printf("hello this works!\n");
 	//otherwise, proceed with cloning last card and insert null.
 
 	//printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
