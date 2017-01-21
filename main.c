@@ -238,8 +238,15 @@ PRINT OUTPUT:
         if (x == 1){ //if in hand!!! :D
           int j = 0;
           char ** p = playable(HANDS[currPlayerIndex], play);
-          while(*p ){
-            strcpy(HANDS[currPlayerIndex][j], *p);
+          while(*p != 0){
+          	printf("-----------------------\n");
+          	printf("*p: %s\n", *p);
+          	printf("currplayerindex: %d\n", currPlayerIndex);
+          	printf("j: %d\n", j);
+          	printf("HANDS[currPlayerIndex][j] before: %s\n", HANDS[currPlayerIndex][j]);
+          	HANDS[currPlayerIndex][j] = *p;
+            //strcpy(HANDS[currPlayerIndex][j], *p); //THIS IS TOXIC. SPENT TOO MUCH TIME ON THIS.
+            printf("HANDS[currPlayerIndex][j] after: %s\n", HANDS[currPlayerIndex][j]);
             p++;
             j++;
           }
