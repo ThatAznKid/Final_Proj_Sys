@@ -148,7 +148,9 @@ PRINT OUTPUT:
     }
     strcpy(NAMES2[0],NAMES[counter-1]);
     char * currCard = draw(1,1);
-    printf("\nCurrent card: %s\n", currCard);
+    printf("\nCurrent card: %s\n", currCard); 
+    
+    int cardDrawn = 0; 
 
     while (42) { //let's play a game... 
         //----------------------------------------------------------------------
@@ -156,8 +158,10 @@ PRINT OUTPUT:
         printf("\n");
         int currPlayerNumba = turnCounter % counter; //whose turn it is
         int currPlayerIndex = turnCounter % counter - 1; //index in HANDS is counter
-        if (currPlayerIndex == -1) 
-            currPlayerIndex = counter - 1; 
+        if (currPlayerIndex == -1) {
+            currPlayerIndex = counter - 1;
+        }
+        
         printf("           =====  TURN %d --- [ %s's Turn ]  =====\n", turnCounter, NAMES2[currPlayerNumba]); //moddin'
 
         /* find the length of all players' hands */
@@ -192,19 +196,6 @@ PRINT OUTPUT:
         printf("**testing purposes** play = %s\n", play);
 
         //this part is a lil messy rn  
-        
-        if (strcmp (play,"draw") == 0) {
-        	type_text("\nYou drew a card!\n");
-        	usleep(300000);
-        	type_text("\nHere's your new hand:\n");  
-            drawCard(HANDS[currPlayerIndex]); 
-            currHandLen++; 
-            for (j = 0; j < currHandLen; j++){
-    		    printf("|| %s ",HANDS[currPlayerIndex][j]);
-            }  
-            printf("||\n");
-            usleep(300000);
-        }
     
         //if play in hand or play matches w lseeked last card by color or # or wild or skip/rev
 
@@ -214,6 +205,7 @@ PRINT OUTPUT:
         
         /* is the played card in their hand? */
         /* --------------------------------- */
+    if (strcmp(play,"pass") != 0 && strcmp(play,"help") != 0 && strcmp (play,"draw") != 0){
         int x = inHand( currHandLen, currPlayerIndex, play, HANDS[currPlayerIndex]);
         
         char *PLAY; 
@@ -293,6 +285,7 @@ PRINT OUTPUT:
             }     
             printf("||\n");
         } 
+        } //end of if play conditional
         
         //check if the card they put down is valid (ex: if it's in their hand)
         //variable set to lseek to check if card is playable; if not, prompts user to 
@@ -323,7 +316,39 @@ PRINT OUTPUT:
         //tentative lmao
 
         //if help:   
-        //-------- DONE 
+        //-------- DONE  
+        
+        if ((strcmp (play,"draw") == 0) && cardDrawn == 0) {
+        	type_text("\nYou drew a card!\n");
+        	usleep(300000);
+        	type_text("\nHere's your new hand:\n");  
+            drawCard(HANDS[currPlayerIndex]); 
+            currHandLen++; 
+            for (j = 0; j < currHandLen; j++){
+    		    printf("|| %s ",HANDS[currPlayerIndex][j]);
+            }  
+            printf("||\n");
+            usleep(300000);
+            cardDrawn = 1;
+        } 
+        
+        if (strcmp (play,"pass") == 0) {  
+            if (cardDrawn == 0) { 
+                type_text("\nBefore passing you must draw a card at least once.\n");
+                type_text("\nYou drew a card!\n");
+        	    usleep(300000);
+        	    type_text("\nHere's your new hand:\n");  
+                drawCard(HANDS[currPlayerIndex]); 
+                currHandLen++; 
+                for (j = 0; j < currHandLen; j++){
+    		        printf("|| %s ",HANDS[currPlayerIndex][j]);
+                }  
+                printf("||\n");
+                usleep(300000);
+            }
+            cardDrawn = 1;
+        }
+        
         if (strcmp(play,"help") == 0){
             printf("%s\n",helpBox);
             printf("Card or Command: ");
@@ -334,8 +359,7 @@ PRINT OUTPUT:
         }
 
         
-
-
+        cardDrawn = 0; //reset the one draw per turn allowance
         turnCounter++; //end of a turn
     }
 
