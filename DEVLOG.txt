@@ -52,5 +52,6 @@
 
 1/21/17 CELINE YAN
 - playable wasnt workin but now it works!! 
+- started on checkValidity()
 
 

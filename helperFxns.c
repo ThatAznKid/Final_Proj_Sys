@@ -42,3 +42,60 @@ char * returnPlay(char *s){
   return s;
 }
 
+//can player put down his card based on curr card?
+// 1 -- yes
+// 0 -- no
+int checkValidity (char *playedCard, char *currCard){
+
+  char FIRSTLETTER = currCard[0];
+  char SECLETTER = currCard[4];
+
+  if (playedCard[0] == FIRSTLETTER)
+      return 1; //bool 
+  
+    if (playedCard[4] == SECLETTER)
+      return 1; //bool 
+
+  return 0; //not a valid card to put down
+
+}
+  //Wild is weird 
+  //Returns:
+  /*  
+    1 = regular card --> normal play!!
+    2 = +2 --> force next player to draw 2 cards
+    3 = Wild Color --> prompt user for what color they want to set
+    4 = +4 --> force next player to draw 4 cards
+    5 = Skip --> force next player to not be able to do anything
+    6 = Reverse --> uhh LOL nothing for now??
+
+  */
+
+/*
+int cardImpact (char *playedCard, char *currCard){
+  char *FIRSTLETTERS[4];
+  FIRSTLETTERS = {"G","R","B","Y"};
+  char *SECLETTERS[13];
+  SECLETTERS = {"0","1","2","3","4","5","6","7","8","9","+","S","R"};
+  int i;
+  for (i=0; i < 4; i++){
+    if (playedCard[0] == FIRSTLETTERS[i])
+      return 1; //bool 
+  } 
+  for (i=0; i < 13; i++){
+    if (playedCard[4] == SECLETTERS[i])
+      return 1; //bool 
+  } 
+
+  //if it's a wild card
+  if (playedCard[0] == "W"){
+    if (playedCard[4] == "C")
+      return 3; //haha get it because C is the 3rd letter of alphabet haha
+    if (playedCard[4] == "+")
+      if (playedCard[6] == "4")
+        return 4;
+    }
+
+  return 0;
+}
+*/
