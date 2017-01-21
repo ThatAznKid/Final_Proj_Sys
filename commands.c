@@ -37,7 +37,7 @@ char ** playable( char **origHand, char *playedCard ){
 		//printf("orig index + 1 is: %d\n", origIndex+1);
 		//printf("origHand [orig index + 1]is: %s\n", origHand[origIndex+1]);
  			if (strcmp(origHand[origIndex],playedCard) == 0){
-				//printf("FOUND THE CARD!! \n");
+				printf("FOUND THE CARD!! \n");
 				origIndex++; //have to account for last if incrementing
 				boolean = 1;
 			}
@@ -46,11 +46,12 @@ char ** playable( char **origHand, char *playedCard ){
 		newHand[newIndex] = origHand[origIndex];
 		//printf("newHand[newIndex]: %s\n", newHand[newIndex]);
 		newIndex++;
+		//if (strcmp(origHand[origIndex+1], playedCard) == 0) break; //save 2nd to last card
 		origIndex++;
-		//printf("orig index++ : %d\n", origIndex);
+		printf("orig index++ : %d\n", origIndex);
 		//printf("new index++ : %d\n", newIndex);
 	}
-
+	printf("helloOOO this works!\n");
 	//if playedCard was the last card in hand... this takes care of it.
 	if (strcmp(origHand[origIndex], playedCard) == 0){
 
@@ -61,7 +62,7 @@ char ** playable( char **origHand, char *playedCard ){
     		printf("||\n\n");
     	return newHand; //return statement terminates function
 	}
-
+	printf("hello this works!\n");
 	//otherwise, proceed with cloning last card and insert null.
 
 	//printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");

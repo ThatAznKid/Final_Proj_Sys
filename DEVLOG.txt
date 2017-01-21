@@ -47,6 +47,8 @@
 1/20/17 CELINE YAN
 - playable() works
 - found a bug from copying over playable()'s return array. fixed!
+- solved "recursive issue": 
+	- if player inputs wrong/unplayable card, it is thrown into while loop until player puts down legit card.
 
 
 

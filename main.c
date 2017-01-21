@@ -216,6 +216,10 @@ PRINT OUTPUT:
         /* --------------------------------- */
         int x = inHand( currHandLen, currPlayerIndex, play, HANDS[currPlayerIndex]);
         
+        char *PLAY; 
+        //strcpy(PLAY,returnPlay(play));
+        PLAY = returnPlay(play);
+        printf("1ST PLAY: %s\n", PLAY);
         /* if not... */
         /* --------- */
         while (x == 0){ 
@@ -224,29 +228,39 @@ PRINT OUTPUT:
                    "a playable card, you must draw. Try again: ");
             //how to make recursive???
             char str[100] = "";
-            char *play = str;
-            fgets(play,100,stdin);
-            play[strlen(play) - 1] = 0;
+            char *newplay = str;
+            fgets(newplay,100,stdin);
+            newplay[strlen(newplay) - 1] = 0;
             printf("\n");
+            //printf("newplay: %s\n",newplay);
+            //char *PLAY = returnPlay(newplay);
+            PLAY = returnPlay(newplay);
+            //printf("NEW PLAY: %s\n", PLAY);
 
-            //:D work on dis later!!
-            x = inHand( currHandLen, currPlayerIndex, play, HANDS[currPlayerIndex]);
+            x = inHand( currHandLen, currPlayerIndex, newplay, HANDS[currPlayerIndex]);
         }
+
+        //play = PLAY;
+        //strcpy(play,PLAY);
+        //printf("PLAYYYYYY: %s\n", PLAY);
+        play = returnPlay(PLAY);
+        //printf("playyyyy: %s\n", play);
 
         /* if so... */
         /* --------- */        
         if (x == 1){ //if in hand!!! :D
+        	//printf("this is your play!!!: %s\n",play);
           int j = 0;
           char ** p = playable(HANDS[currPlayerIndex], play);
           while(*p != 0){
-          	printf("-----------------------\n");
-          	printf("*p: %s\n", *p);
-          	printf("currplayerindex: %d\n", currPlayerIndex);
-          	printf("j: %d\n", j);
-          	printf("HANDS[currPlayerIndex][j] before: %s\n", HANDS[currPlayerIndex][j]);
+          	//printf("-----------------------\n");
+          	//printf("*p: %s\n", *p);
+          	//printf("currplayerindex: %d\n", currPlayerIndex);
+          	//printf("j: %d\n", j);
+          	//printf("HANDS[currPlayerIndex][j] before: %s\n", HANDS[currPlayerIndex][j]);
           	HANDS[currPlayerIndex][j] = *p;
-            //strcpy(HANDS[currPlayerIndex][j], *p); //THIS IS TOXIC. SPENT TOO MUCH TIME ON THIS.
-            printf("HANDS[currPlayerIndex][j] after: %s\n", HANDS[currPlayerIndex][j]);
+            
+            //printf("HANDS[currPlayerIndex][j] after: %s\n", HANDS[currPlayerIndex][j]);
             p++;
             j++;
           }
