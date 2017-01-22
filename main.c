@@ -207,17 +207,24 @@ PRINT OUTPUT:
         /* --------------------------------- */
     if (strcmp(play,"pass") != 0 && strcmp(play,"help") != 0 && strcmp (play,"draw") != 0){
         int x = inHand( currHandLen, currPlayerIndex, play, HANDS[currPlayerIndex]);
-        
+        int v = checkValidity(play, currCard); //v for validity
         char *PLAY; 
         //strcpy(PLAY,returnPlay(play));
         PLAY = returnPlay(play);
         printf("1ST PLAY: %s\n", PLAY);
         /* if not... */
         /* --------- */
-        while (x == 0){ 
+        while (x == 0 || v == 0){ 
+        	if (x == 0){
+            type_text("Your card was not playable. Your card was typed in correctly\n"
+                   "or it is not in your hand. If you do not have a playable card, \n"
+                   "you must draw. Try again: ");
+        }
+        if (v == 0){
             type_text("Your card was not playable. Please check if your card was typed\n"
                    "correctly or if it is in your hand. Note that if you do not have \n"
-                   "a playable card, you must draw. Try again: ");
+                   "a playable card, you must draw. Try again: ");        	
+        }
             //how to make recursive???
             char str[100] = "";
             char *newplay = str;
@@ -230,6 +237,7 @@ PRINT OUTPUT:
             //printf("NEW PLAY: %s\n", PLAY);
 
             x = inHand( currHandLen, currPlayerIndex, newplay, HANDS[currPlayerIndex]);
+            v
         }
 
         //play = PLAY;
@@ -240,7 +248,7 @@ PRINT OUTPUT:
 
         /* if so... */
         /* --------- */        
-        if (x == 1){ //if in hand!!! :D
+        if (x == 1 && v == 1){ //if in hand!!! :D
         	//printf("this is your play!!!: %s\n",play);
           int j = 0;
           char ** p = playable(HANDS[currPlayerIndex], play);
