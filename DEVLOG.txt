@@ -48,7 +48,11 @@
 - playable() works
 - found a bug from copying over playable()'s return array. fixed!
 - solved "recursive issue": 
-	- if player inputs wrong/unplayable card, it is thrown into while loop until player puts down legit card.
+	- if player inputs wrong/unplayable card, it is thrown into while loop until player puts down legit card. 
+
+1/20/17 JIAWEI CHEN 
+- finished pass 
+- worked on main
 
 1/21/17 CELINE YAN
 - playable wasnt workin but now it works!! 
@@ -59,4 +63,8 @@
 - players can only place down the right card in accordance to the current card now
 - command help doesnt break now!
 - no wild cards for the first currCard ... EVER AGAIN
+
+1/22/17 JIAWEI CHEN 
+- fixed currCard
+- worked on read/write for the playedCards
 
