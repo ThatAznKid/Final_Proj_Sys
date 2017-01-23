@@ -50,10 +50,18 @@ int checkValidity (char *playedCard, char *currCard){
   char FIRSTLETTER = currCard[0];
   char SECLETTER = currCard[4];
 
+  if (currCard[4] == 0){ //for wild Color card
+    if (playedCard[0] == currCard[0])
+      return 1;
+  }
+
+  if (playedCard[0] == "W") //if wild +4 it's fine!
+    return 1;
+
   if (playedCard[0] == FIRSTLETTER)
       return 1; //bool 
   
-    if (playedCard[4] == SECLETTER)
+  if (playedCard[4] == SECLETTER)
       return 1; //bool 
 
   return 0; //not a valid card to put down
@@ -64,38 +72,106 @@ int checkValidity (char *playedCard, char *currCard){
   /*  
     1 = regular card --> normal play!!
     2 = +2 --> force next player to draw 2 cards
-    3 = Wild Color --> prompt user for what color they want to set
     4 = +4 --> force next player to draw 4 cards
     5 = Skip --> force next player to not be able to do anything
     6 = Reverse --> uhh LOL nothing for now??
-
+    93 = WILD Color --> prompt user to declare color
+    94 = WILD +4 --> prompt user to declare color, next user draws 4 times
   */
 
-/*
-int cardImpact (char *playedCard, char *currCard){
-  char *FIRSTLETTERS[4];
-  FIRSTLETTERS = {"G","R","B","Y"};
-  char *SECLETTERS[13];
-  SECLETTERS = {"0","1","2","3","4","5","6","7","8","9","+","S","R"};
-  int i;
-  for (i=0; i < 4; i++){
-    if (playedCard[0] == FIRSTLETTERS[i])
-      return 1; //bool 
-  } 
-  for (i=0; i < 13; i++){
-    if (playedCard[4] == SECLETTERS[i])
-      return 1; //bool 
-  } 
 
-  //if it's a wild card
+int cardImpact (char *playedCard){
+  char *NORMAL[10];
+  NORMAL = {"0","1","2","3","4","5","6","7","8","9"};
+
+  int i;
+  //normal
+  for (i=0; i < 10; i++){
+    if (playedCard[4] == NORMAL[i])
+      return 1; //normal card
+  } 
+  //WILD
   if (playedCard[0] == "W"){
     if (playedCard[4] == "C")
-      return 3; //haha get it because C is the 3rd letter of alphabet haha
+      return 93; //WILD COLOR trigger
     if (playedCard[4] == "+")
-      if (playedCard[6] == "4")
-        return 4;
-    }
-
-  return 0;
+      return 94; //WILD +4 trigger
+  //+2/+4
+  if (playedCard[4] == "+"){
+    if (playedCard[5] == "2")
+      return 2; //+2 trigger
+    if (playedCard[5] == "4")
+      return 4; //+4 trigger
+  }
+  //skip and reverse
+    if (playedCard[4] == "S")
+      return 5; //skip trigger
+    if (playedCard[4] == "R")
+      return 6; //reverse trigger
+  return 0; //should never happen ???
 }
-*/
+
+if (cardImpact(PLAY) == 93){
+  //prompt user to call for color. fgets. 
+  type_text("\nYou put down a WILD COLOR. Indicate what color you would like\n"
+            "to place: ");
+  char str[100] = "";
+  char *newplay = str;
+  fgets(newplay,100,stdin);
+  newplay[strlen(newplay) - 1] = 0;
+  printf("\n");
+  PLAY = returnPlay(newplay);
+  strcpy(currCard, PLAY);
+}
+
+if (cardImpact(PLAY) == 94){
+  //prompt user to call for color. fgets. +4 on next players turn
+  type_text("\nYou put down a WILD +4. Indicate what color you would like\n"
+            "to place: ");
+  char str[100] = "";
+  char *newplay = str;
+  fgets(newplay,100,stdin);
+  newplay[strlen(newplay) - 1] = 0;
+  printf("\n");
+  PLAY = returnPlay(newplay);
+  strcpy(currCard, PLAY);
+  cardtoDraw = 4;
+}
+
+int cardToDraw = 0;
+
+if (cardImpact(PLAY) == 2){
+  cardToDraw = 2;
+}
+if (cardImpact(PLAY) == 4){
+  cardtoDraw = 4;
+}
+if (cardImpact(PLAY) == 5){
+  //skip next person's turn, update by increasing 1 on currPlayerIndex
+  //too hard
+}
+if (cardImpact(PLAY) == 6){
+  //nothing (reverse)
+}
+
+//placed in beginning of turn, keeps track of if previous person placed +2 or +4
+if (cardToDraw != 0){
+  if (cardtoDraw == 2){ //+2
+    type_text("You drew 2 new cards!\n")
+    drawCard(HANDS[currPlayerIndex]); 
+    drawCard(HANDS[currPlayerIndex]);
+    currHandLen += 2; 
+  }
+  if (cardToDraw == 4){ //+4
+    type_text("You drew 4 new cards!\n")
+    drawCard(HANDS[currPlayerIndex]); 
+    drawCard(HANDS[currPlayerIndex]);
+    drawCard(HANDS[currPlayerIndex]);
+    drawCard(HANDS[currPlayerIndex]);
+    currHandLen += 4; 
+  }
+  cardToDraw = 0; //reset to 0
+}
+
+
+
