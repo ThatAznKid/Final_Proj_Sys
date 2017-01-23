@@ -252,6 +252,7 @@ PRINT OUTPUT:
             //printf("newplay: %s\n",newplay);
             //char *PLAY = returnPlay(newplay);
             PLAY = returnPlay(newplay);
+            strcpy(currCard, PLAY);
             /*
             if (strcmp(PLAY,"help") == 0){
             printf("%s\n",helpBox);
@@ -280,7 +281,7 @@ PRINT OUTPUT:
             x = inHand(currHandLen, currPlayerIndex, PLAY, HANDS[currPlayerIndex]);
             v = checkValidity(PLAY, currCard);
         }
-
+        strcpy(currCard, PLAY);
         //play = PLAY;
         //strcpy(play,PLAY);
         //printf("PLAYYYYYY: %s\n", PLAY);

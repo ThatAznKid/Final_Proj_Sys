@@ -5,4 +5,4 @@ run:
 	./UNO 
 	
 clean: 
-	rm UNO
+	rm UNO 
