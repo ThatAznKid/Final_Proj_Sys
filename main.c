@@ -148,28 +148,31 @@ PRINT OUTPUT:
     }
     strcpy(NAMES2[0],NAMES[counter-1]);
     char * currCard = draw(1,1);
-    printf("\nCurrent card: %s\n", currCard); 
+    while (strcmp(currCard, "WILD COLOR") == 0 || strcmp(currCard, "WILD +4") == 0) //test that it aint a wild >:c
+    	currCard = draw(1,1);
+ 
+    //printf("\nCurrent card: %s\n", currCard); 
     
     int cardDrawn = 0; 
 
     while (42) { //let's play a game... 
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
-        printf("\n");
+        printf("\n\n\n");
         int currPlayerNumba = turnCounter % counter; //whose turn it is
         int currPlayerIndex = turnCounter % counter - 1; //index in HANDS is counter
         if (currPlayerIndex == -1) {
             currPlayerIndex = counter - 1;
         }
-        
+        printf("           =======================================\n");
         printf("           =====  TURN %d --- [ %s's Turn ]  =====\n", turnCounter, NAMES2[currPlayerNumba]); //moddin'
-
+		printf("           =======================================\n");
         /* find the length of all players' hands */
         /* ------------------------------------- */
         int arrayLen = 0;
         for (i = 0; i < counter; i++){
             while (HANDS[i][arrayLen]){arrayLen++;} //see how long the array is
-    	    printf("P%d: Number of Cards in %s's hand: %d\n", i+1, NAMES[i], arrayLen);
+    	    printf("           P%d: Number of Cards in %s's hand: %d\n", i+1, NAMES[i], arrayLen);
             arrayLen = 0; //reset length of array counter
             usleep(150000);
         }
@@ -182,6 +185,8 @@ PRINT OUTPUT:
         for (j = 0; j < currHandLen; j++){printf("|| %s ",HANDS[currPlayerIndex][j]);}  
         printf("||\n\n"); 
     	usleep(300000);
+    	printf("\n           ******* Current card: %s *******\n\n", currCard);
+    	usleep(300000);
         /* prompt the user */
         /* --------------- */
         type_text(	"Type the card to put down, or use a command. \n"
@@ -193,7 +198,7 @@ PRINT OUTPUT:
         char *play = str;
         fgets(play,100,stdin);
         play[strlen(play) - 1] = 0;
-        printf("**testing purposes** play = %s\n", play);
+        //printf("**testing purposes** play = %s\n", play);
 
         //this part is a lil messy rn  
     
@@ -205,26 +210,39 @@ PRINT OUTPUT:
         
         /* is the played card in their hand? */
         /* --------------------------------- */
-    if (strcmp(play,"pass") != 0 && strcmp(play,"help") != 0 && strcmp (play,"draw") != 0){
-        int x = inHand( currHandLen, currPlayerIndex, play, HANDS[currPlayerIndex]);
-        int v = checkValidity(play, currCard); //v for validity
-        char *PLAY; 
+    if (strcmp(play,"pass") != 0 /*&& strcmp(play,"help") != 0*/ && strcmp (play,"draw") != 0){
+    	char *PLAY; 
+    	PLAY = returnPlay(play);
+    	 while (strcmp(PLAY,"help") == 0){
+            printf("%s\n\n",helpBox);
+            printf("\nCard or Command: ");
+            char str[100] = "";
+            char *play = str;
+            fgets(play,100,stdin);
+            play[strlen(play) - 1] = 0;
+            printf("\n");
+            PLAY = returnPlay(play);
+        }
         //strcpy(PLAY,returnPlay(play));
-        PLAY = returnPlay(play);
-        printf("1ST PLAY: %s\n", PLAY);
+        //PLAY = returnPlay(play);
+        //printf("1ST PLAY: %s\n", PLAY);
         /* if not... */
         /* --------- */
+         if (strcmp(PLAY,"pass") == 0 /*|| strcmp(PLAY,"help") == 0*/ || strcmp (PLAY,"draw") == 0)
+            break;
+         int x = inHand(currHandLen, currPlayerIndex, PLAY, HANDS[currPlayerIndex]);
+         int v = checkValidity(PLAY, currCard);
         while (x == 0 || v == 0){ 
         	if (x == 0){
-            type_text("Your card was not playable. Your card was typed in correctly\n"
+            	type_text("Your card was not playable. Your card was typed incorrectly\n"
                    "or it is not in your hand. If you do not have a playable card, \n"
                    "you must draw. Try again: ");
-        }
-        if (v == 0){
-            type_text("Your card was not playable. Please check if your card was typed\n"
-                   "correctly or if it is in your hand. Note that if you do not have \n"
-                   "a playable card, you must draw. Try again: ");        	
-        }
+        	}
+        	else if (v == 0){
+            	type_text("Your card was not playable. The current card is ");
+            	printf("%s.\n", currCard);
+            	type_text("You may only play a card that is the same color or number, \nor any Wild card. Try again: ");
+        	}
             //how to make recursive???
             char str[100] = "";
             char *newplay = str;
@@ -234,10 +252,33 @@ PRINT OUTPUT:
             //printf("newplay: %s\n",newplay);
             //char *PLAY = returnPlay(newplay);
             PLAY = returnPlay(newplay);
+            /*
+            if (strcmp(PLAY,"help") == 0){
+            printf("%s\n",helpBox);
+            printf("Card or Command: ");
+            char str[100] = "";
+            char *play = str;
+            fgets(play,100,stdin);
+            play[strlen(play) - 1] = 0;
+            PLAY = returnPlay(play);
+        }
+        */
             //printf("NEW PLAY: %s\n", PLAY);
-
-            x = inHand( currHandLen, currPlayerIndex, newplay, HANDS[currPlayerIndex]);
-            v
+   	 while (strcmp(PLAY,"help") == 0){
+            printf("%s\n",helpBox);
+            printf("\nCard or Command: ");
+            char str[100] = "";
+            char *play = str;
+            fgets(play,100,stdin);
+            play[strlen(play) - 1] = 0;
+            printf("\n");
+            PLAY = returnPlay(play);
+        }
+        //printf("YOOOO CARDDD: %s\n", PLAY);
+            if (strcmp(PLAY,"pass") == 0 /*|| strcmp(PLAY,"help") == 0*/ || strcmp (PLAY,"draw") == 0)
+            	break;
+            x = inHand(currHandLen, currPlayerIndex, PLAY, HANDS[currPlayerIndex]);
+            v = checkValidity(PLAY, currCard);
         }
 
         //play = PLAY;
@@ -322,9 +363,6 @@ PRINT OUTPUT:
         //if sort:
         //--------
         //tentative lmao
-
-        //if help:   
-        //-------- DONE  
         
         if ((strcmp (play,"draw") == 0) && cardDrawn == 0) {
         	type_text("\nYou drew a card!\n");
@@ -356,17 +394,7 @@ PRINT OUTPUT:
             }
             cardDrawn = 1;
         }
-        
-        if (strcmp(play,"help") == 0){
-            printf("%s\n",helpBox);
-            printf("Card or Command: ");
-            char str[100] = "";
-            char *play = str;
-            fgets(play,100,stdin);
-            play[strlen(play) - 1] = 0;
-        }
 
-        
         cardDrawn = 0; //reset the one draw per turn allowance
         turnCounter++; //end of a turn
     }

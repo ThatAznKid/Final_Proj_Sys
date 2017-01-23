@@ -54,4 +54,9 @@
 - playable wasnt workin but now it works!! 
 - started on checkValidity()
 
+1/22/17 CELINE YAN
+- fixed distinguishing between "not in hand" and "validity"
+- players can only place down the right card in accordance to the current card now
+- command help doesnt break now!
+- no wild cards for the first currCard ... EVER AGAIN
 
