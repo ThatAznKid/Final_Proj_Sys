@@ -105,8 +105,8 @@ char ** playable( char **origHand, char *playedCard ){
 }
 
 //leave the handling of the array one size bigger in the main conditional 
-void drawCard(char * HAND[]) { //input the player's hand who you want the card to be added to
-    char * toBeAdded = draw(1,1); 
+void drawCard(char * HAND[], int d) { //input the player's hand who you want the card to be added to
+    char * toBeAdded = draw(1,1, d); 
     int count = 0;
     while (HAND[count]) { 
         count++;           
