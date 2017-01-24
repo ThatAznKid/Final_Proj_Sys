@@ -8,4 +8,5 @@ char * returnPlay(char *s);
 
 int checkValidity (char *playedCard, char *currCard);
 
+//int cardImpact (char *playedCard);
 
