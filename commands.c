@@ -61,11 +61,12 @@ char ** playable( char **origHand, char *playedCard ){
 	if (origHand[origIndex] == 0){
 		//printf("in the if\n");
 		newHand[newIndex] = 0;
-
+/*
 	printf("printing out hand from fxn:\n");
 	int j;
 	for (j = 0; j < newIndex; j++){printf("|| %s ",newHand[j]);}  
     printf("||\n\n");
+    */
 	return newHand;
 	}
 

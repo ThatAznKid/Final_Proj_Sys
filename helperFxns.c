@@ -112,12 +112,9 @@ int cardImpact (char *playedCard){
       return 94; //WILD +4 trigger
   
   //+2/+4
-  if (strcmp(&four, "+") == 0){
-    if (strcmp(&five, "2") == 0)
+  if (strcmp(playedCard, "RED +2") == 0 || strcmp(playedCard, "BLU +2") == 0 ||strcmp(playedCard, "GRE +2") == 0 || strcmp(playedCard, "YEL +2") == 0)
       return 2; //+2 trigger
-    if (strcmp(&five, "4") == 0)
-      return 4; //+4 trigger
-  }
+
   //skip and reverse
     if (strcmp(&four, "S") == 0)
       return 5; //skip trigger

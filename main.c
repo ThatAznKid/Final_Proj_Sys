@@ -153,7 +153,8 @@ PRINT OUTPUT:
     while (42) { //let's play a game... 
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
-        printf("\n\n\n");
+        //printf("\n\n\n");
+        system("clear");
         int currPlayerNumba = turnCounter % counter; //whose turn it is
         int currPlayerIndex = turnCounter % counter - 1; //index in HANDS is counter
         if (currPlayerIndex == -1) 
@@ -389,7 +390,11 @@ PRINT OUTPUT:
             }     
             printf("||\n");
 
-            printf("%d\n", cardImpact(play));
+            //printf("%d\n", cardImpact(play));
+
+            if (cardImpact(play) == 2){
+                cardToDraw = returnCTD(2);
+            }
 
             if (cardImpact(play) == 93){
             //prompt user to call for color. fgets. 
@@ -505,6 +510,7 @@ PRINT OUTPUT:
         cardDrawn = 0; //reset the one draw per turn allowance
         turnCounter++; //end of a turn
         //printf("4 CARDDD TO DRAW: %d\n", cardToDraw);
+        sleep(2);
     }
 
     return 0;
