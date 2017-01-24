@@ -258,12 +258,15 @@ PRINT OUTPUT:
                 */
             }
             
+            else if ((strcmp (PLAY,"draw")) == 0 && cardDrawn == 1) { 
+                printf("\nYou have already drawn a card this turn. You may not draw another.\n");
+            }
             else if ((strcmp (PLAY,"draw")) == 0 && cardPerTurn == 1) { 
-                printf("You have already played a card this turn! You may not draw again.\n");
+                printf("\nYou have already played a card this turn! You may not draw again.\n");
             }
             
             else if ((strcmp (PLAY,"draw") == 0) && cardDrawn == 0) {
-                           printf ("check cardPerTurn: %d\n", cardPerTurn);
+                printf ("check cardPerTurn: %d\n", cardPerTurn);
             	type_text("\nYou drew a card!\n");
             	usleep(300000);
             	type_text("\nHere's your new hand:\n");  
@@ -322,6 +325,7 @@ PRINT OUTPUT:
                     //printf ("x:%d\n, v:%d\n",x,v);
                 	if (x == 0){
                 	    //printf("1\n");
+                	    printf("If you do not wish to play a card/do not have one to play, type 'OUT'\n");
                     	type_text("\nYour card was not playable. Your card was typed incorrectly\n"
                            "or it is not in your hand. If you do not have a playable card, \n"
                            "you must draw. Try again: ");
@@ -333,7 +337,10 @@ PRINT OUTPUT:
                         printf("newplay: %s\n",newplay);
                         //char *PLAY = returnPlay(newplay);
                         //PLAY = returnPlay(newplay);
-                        //strcpy(currCard, PLAY);
+                        //strcpy(currCard, PLAY); 
+                        if (strcmp(newplay,"OUT") == 0) { 
+                            break; 
+                        }
                         x = inHand(currHandLen, currPlayerIndex, newplay, HANDS[currPlayerIndex]);
                         v = checkValidity(newplay, currCard);
                         if (x == 1 && v == 1) {
@@ -343,6 +350,7 @@ PRINT OUTPUT:
                 	}
                 	else if (v == 0){
                 	    //printf("2\n");
+                	    printf("If you do not wish to play a card/do not have one to play, type 'OUT'\n");
                     	type_text("\nYour card was not playable. The current card is ");
                     	printf("%s.\n", currCard);
                     	type_text("You may only play a card that is the same color or number, \nor any Wild card. Try again: ");
@@ -355,6 +363,9 @@ PRINT OUTPUT:
                         //char *PLAY = returnPlay(newplay);
                         //PLAY = returnPlay(newplay);
                         //strcpy(currCard, PLAY);
+                        if (strcmp(newplay,"OUT") == 0) { 
+                            break; 
+                        }
                         x = inHand(currHandLen, currPlayerIndex, newplay, HANDS[currPlayerIndex]);
                         v = checkValidity(newplay, currCard);
                         if (x == 1 && v == 1) {
