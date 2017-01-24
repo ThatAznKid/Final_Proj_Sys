@@ -1,0 +1,131 @@
+//check if the card they put down is valid (ex: if it's in their hand)
+        //variable set to lseek to check if card is playable; if not, prompts user to 
+        //put down a new card or draw
+        
+         //how to make recursive???
+                    /*
+                    char str[100] = "";
+                    char *newplay = str;
+                    fgets(newplay,100,stdin);
+                    newplay[strlen(newplay) - 1] = 0;
+                    printf("\n");
+                    printf("newplay: %s\n",newplay);
+                    //char *PLAY = returnPlay(newplay);
+                    PLAY = returnPlay(newplay);
+                    strcpy(currCard, PLAY);
+                    */
+ 
+                    /*
+                    if (strcmp(PLAY,"help") == 0){
+                    printf("%s\n",helpBox);
+                    printf("Card or Command: ");
+                    char str[100] = "";
+                    char *play = str;
+                    fgets(play,100,stdin);
+                    play[strlen(play) - 1] = 0;
+                    PLAY = returnPlay(play);
+                }
+                */
+                    //printf("NEW PLAY: %s\n", PLAY);
+            
+            /*        
+           	while (strcmp(PLAY,"help") == 0){
+                printf("%s\n",helpBox);
+                printf("\nCard or Command: ");
+                char str[100] = "";
+                char *play = str;
+                fgets(play,100,stdin);
+                play[strlen(play) - 1] = 0;
+                printf("\n"); 
+                PLAY = returnPlay(play);
+                //printf("in le loop!\n");
+            }
+            */
+
+        //printf("YOOOO CARDDD: %s\n", PLAY);
+        //printf("you're gonna break!\n");
+        //if (strcmp(PLAY,"pass") == 0 /*|| strcmp(PLAY,"help") == 0*/ || strcmp (PLAY,"draw") == 0)
+                //break;
+
+         //printf("2nd x: %d\n", x);
+         //printf("2nd v: %d\n", v);
+
+/*
+            x = inHand(currHandLen, currPlayerIndex, PLAY, HANDS[currPlayerIndex]);
+            v = checkValidity(PLAY, currCard);
+        }
+    }
+
+         int x = inHand(currHandLen, currPlayerIndex, PLAY, HANDS[currPlayerIndex]);
+         int v = checkValidity(PLAY, currCard);
+*/
+
+         //printf("3rd x: %d\n", x);
+         //printf("3rd v: %d\n", v);
+         //printf("PLAY: %s", PLAY);
+         //printf("currCard: %s", currCard);
+
+        //strcpy(currCard, PLAY);
+        //play = PLAY;
+        //strcpy(play,PLAY);
+        //printf("PLAYYYYYY: %s\n", PLAY);
+        //play = returnPlay(PLAY);
+        //printf("playyyyy: %s\n", play);
+
+        /* if so... */
+        /* --------- */        
+        //if (x == 1 && v == 1){ //if in hand!!! :D
+        	//printf("this is your play!!!: %s\n",play);
+            /*
+            int j = 0;
+            char ** p = playable(HANDS[currPlayerIndex], play);
+            while(*p != 0){
+            */
+          	//printf("-----------------------\n");
+          	//printf("*p: %s\n", *p);
+          	//printf("currplayerindex: %d\n", currPlayerIndex);
+          	//printf("j: %d\n", j);
+          	//printf("HANDS[currPlayerIndex][j] before: %s\n", HANDS[currPlayerIndex][j]);
+          	//HANDS[currPlayerIndex][j] = *p;
+            
+            //printf("HANDS[currPlayerIndex][j] after: %s\n", HANDS[currPlayerIndex][j]);
+            /*
+            p++;
+            j++;
+          }
+            HANDS[currPlayerIndex][j] = 0;
+            */
+        	//HANDS[currPlayerIndex] = *playable(HANDS[currPlayerIndex],play);
+          //HANDS[currPlayerIndex] = playable(HANDS[currPlayerIndex],play);
+          //memcpy(HANDS[currPlayerIndex], playable(HANDS[currPlayerIndex],play), arrayLen);
+            /* char newHand[100];
+            newHand = playable(HANDS[currPlayerIndex],play);
+            printf("New hand len:\n"); 
+            for (j = 0; j < currHandLen; j++){
+                printf("|| %s ",newHand[j]);
+            }     
+            printf("||\n");            
+            */
+            /*
+            for (j = 0; j < currHandLen; j++){
+                strHANDS[currPlayerIndex]
+                //printf("|| %s ",HANDS[currPlayerIndex][j]);
+            }  
+            */     
+            
+            /*
+        	type_text("\nYou played ");
+        	printf("%s!\n", play);
+        	usleep(300000);
+        	type_text("\nHere's your new hand:\n");  
+            //drawCard(HANDS[currPlayerIndex]); 
+            currHandLen--; 
+            for (j = 0; j < currHandLen; j++){
+    		    printf("|| %s ",HANDS[currPlayerIndex][j]);
+            }     
+            printf("||\n");
+        } 
+    
+        } //end of if play conditional
+        */
+        

@@ -68,3 +68,6 @@
 - fixed currCard
 - worked on read/write for the playedCards
 
+1/23/17 JIAWEI CHEN
+- cleaned up some comments, threw commented out/unused code in script.txt 
+- fixed play/pass/draw - you must now manually pass your turn 
