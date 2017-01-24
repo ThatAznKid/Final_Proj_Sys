@@ -80,7 +80,7 @@ int main(){
     //creating the 2d array, assigning random cards by drawing.
     for (i = 0; i < counter; i++){
       for (j = 0; j < 7; j++){
-            char * randCard = draw(i,j);
+            char * randCard = draw(i,j,0);
             //printf("randCard %s\n",randCard);
             HANDS[i][j] = randCard;
         }
@@ -141,13 +141,14 @@ PRINT OUTPUT:
       strcpy(NAMES2[k],NAMES[k-1]);
     }
     strcpy(NAMES2[0],NAMES[counter-1]);
-    char * currCard = draw(1,1);
+    char * currCard = draw(1,1,0);
     while (strcmp(currCard, "WILD COLOR") == 0 || strcmp(currCard, "WILD +4") == 0) //test that it aint a wild >:c
-        currCard = draw(1,1);
+        currCard = draw(1,1,0);
  
     //printf("\nCurrent card: %s\n", currCard); 
     
     int cardDrawn = 0; 
+    int cardToDraw = 0; // for +2 / +4
 
     while (42) { //let's play a game... 
         //----------------------------------------------------------------------
@@ -155,9 +156,9 @@ PRINT OUTPUT:
         printf("\n\n\n");
         int currPlayerNumba = turnCounter % counter; //whose turn it is
         int currPlayerIndex = turnCounter % counter - 1; //index in HANDS is counter
-        if (currPlayerIndex == -1) {
+        if (currPlayerIndex == -1) 
             currPlayerIndex = counter - 1;
-        }
+
         printf("           =======================================\n");
         printf("           =====  TURN %d --- [ %s's Turn ]  =====\n", turnCounter, NAMES2[currPlayerNumba]); //moddin'
         printf("           =======================================\n");
@@ -175,11 +176,33 @@ PRINT OUTPUT:
         /* -------------------------------- */
         int currHandLen = 0; //var currHandLen stores current length of hand
         while (HANDS[currPlayerIndex][currHandLen]){currHandLen++;} //see how long current player's hand is
+
+                 if (cardToDraw != 0){
+                if (cardToDraw == 2){ //+2
+                    type_text("\nYou drew 2 new cards!\n");
+                    drawCard(HANDS[currPlayerIndex],1); 
+                    drawCard(HANDS[currPlayerIndex],2);
+                    currHandLen += 2; 
+                }
+                if (cardToDraw == 4){ //+4
+                    type_text("\nYou drew 4 new cards!\n");
+                    drawCard(HANDS[currPlayerIndex],0); 
+                    drawCard(HANDS[currPlayerIndex],1);
+                    drawCard(HANDS[currPlayerIndex],2);
+                    drawCard(HANDS[currPlayerIndex],3);
+                    currHandLen += 4; 
+                }
+                cardToDraw = 0; //reset to 0
+            }
+
+
         printf("\n%s's hand:\n", NAMES2[currPlayerNumba]);    
         for (j = 0; j < currHandLen; j++){printf("|| %s ",HANDS[currPlayerIndex][j]);}  
         printf("||\n\n"); 
         usleep(300000);
         printf("\n           ******* Current card: %s *******\n\n", currCard);
+        usleep(300000);
+        //printf("THE CARDDD TO DRAW: %d\n", cardToDraw);
         usleep(300000);
         /* prompt the user */
         /* --------------- */
@@ -229,7 +252,7 @@ PRINT OUTPUT:
             type_text("\nYou drew a card!\n");
             usleep(300000);
             type_text("\nHere's your new hand:\n");  
-            drawCard(HANDS[currPlayerIndex]); 
+            drawCard(HANDS[currPlayerIndex],0); 
             currHandLen++; 
             for (j = 0; j < currHandLen; j++){
                 printf("|| %s ",HANDS[currPlayerIndex][j]);
@@ -246,7 +269,7 @@ PRINT OUTPUT:
                 type_text("\nYou drew a card!\n");
                 usleep(300000);
                 type_text("\nHere's your new hand:\n");  
-                drawCard(HANDS[currPlayerIndex]); 
+                drawCard(HANDS[currPlayerIndex],0); 
                 currHandLen++; 
                 for (j = 0; j < currHandLen; j++){
                     printf("|| %s ",HANDS[currPlayerIndex][j]);
@@ -365,8 +388,59 @@ PRINT OUTPUT:
                 printf("|| %s ",HANDS[currPlayerIndex][j]);
             }     
             printf("||\n");
+
+            printf("%d\n", cardImpact(play));
+
+            if (cardImpact(play) == 93){
+            //prompt user to call for color. fgets. 
+            type_text("\nYou put down a WILD COLOR. Indicate what color you would like\n"
+            "to place: ");
+            char str[100] = "";
+            char *newplay = str;
+            fgets(newplay,100,stdin);
+            newplay[strlen(newplay) - 1] = 0;
+            printf("\n");
+            PLAY = returnPlay(newplay);
+            while(strcmp(PLAY,"BLU")!= 0 && strcmp(PLAY,"GRE")!=0 && strcmp(PLAY,"RED")!=0 && strcmp(PLAY,"YEL")!=0){
+            type_text("\nYou may only type a valid color in the form of BLU, GRE, RED, or YEL.\n"
+            "Try again: ");
+                char str[100] = "";
+                char *newplay = str;
+                fgets(newplay,100,stdin);
+                newplay[strlen(newplay) - 1] = 0;
+                printf("\n");
+                PLAY = returnPlay(newplay);
+            }
+            strcpy(currCard, PLAY);
+            }
+
+            if (cardImpact(play) == 94){
+            //prompt user to call for color. fgets. +4 on next players turn
+            type_text("\nYou put down a WILD +4. Indicate what color you would like\n"
+            "to place: ");
+            char str[100] = "";
+            char *newplay = str;
+            fgets(newplay,100,stdin);
+            newplay[strlen(newplay) - 1] = 0;
+            printf("\n");
+            PLAY = returnPlay(newplay);
+            while(strcmp(PLAY,"BLU")!= 0 && strcmp(PLAY,"GRE")!=0 && strcmp(PLAY,"RED")!=0 && strcmp(PLAY,"YEL")!=0){
+            type_text("\nYou may only type a valid color in the form of BLU, GRE, RED, or YEL.\n"
+            "Try again: ");
+                char str[100] = "";
+                char *newplay = str;
+                fgets(newplay,100,stdin);
+                newplay[strlen(newplay) - 1] = 0;
+                printf("\n");
+                PLAY = returnPlay(newplay);
+            }
+            strcpy(currCard, PLAY);
+            cardToDraw = returnCTD(4);
+            //printf("4 CARDDD TO DRAW: %d\n", cardToDraw);
+            }
+            //printf("4 CARDDD TO DRAW: %d\n", cardToDraw);
         } 
-    }
+        }
         } //end of if play conditional
         
         //check if the card they put down is valid (ex: if it's in their hand)
@@ -401,7 +475,7 @@ PRINT OUTPUT:
             type_text("\nYou drew a card!\n");
             usleep(300000);
             type_text("\nHere's your new hand:\n");  
-            drawCard(HANDS[currPlayerIndex]); 
+            drawCard(HANDS[currPlayerIndex],0); 
             currHandLen++; 
             for (j = 0; j < currHandLen; j++){
                 printf("|| %s ",HANDS[currPlayerIndex][j]);
@@ -417,7 +491,7 @@ PRINT OUTPUT:
                 type_text("\nYou drew a card!\n");
                 usleep(300000);
                 type_text("\nHere's your new hand:\n");  
-                drawCard(HANDS[currPlayerIndex]); 
+                drawCard(HANDS[currPlayerIndex],0); 
                 currHandLen++; 
                 for (j = 0; j < currHandLen; j++){
                     printf("|| %s ",HANDS[currPlayerIndex][j]);
@@ -430,6 +504,7 @@ PRINT OUTPUT:
 
         cardDrawn = 0; //reset the one draw per turn allowance
         turnCounter++; //end of a turn
+        //printf("4 CARDDD TO DRAW: %d\n", cardToDraw);
     }
 
     return 0;
