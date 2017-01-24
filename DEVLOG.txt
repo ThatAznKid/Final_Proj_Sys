@@ -71,3 +71,18 @@
 1/23/17 JIAWEI CHEN
 - cleaned up some comments, threw commented out/unused code in script.txt 
 - fixed play/pass/draw - you must now manually pass your turn 
+
+1/24/17 CELINE YAN
+- remodified main.c so that summoning 'draw' after 'help' would not terminate program
+- started on WILD cards and cardImpact()
+- finished WILD COLOR and WILD +4 
+- incorportaed WILD COLOR and WILD +4 into main.c and threw in checks
+	- WILD will prompt user to select a new color, only from BLU, GRE, RED, and YEL.
+	- +4 will trigger next user to draw 4 additional cards
+- <color> +2 cards now work
+- modified playing view with system calling
+- we r finished!!!!!!!! heart emoji
+
+
+
+
